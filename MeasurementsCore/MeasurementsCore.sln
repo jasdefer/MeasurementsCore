@@ -1,0 +1,36 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27428.2015
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UnitTests", "UnitTests", "{5DBAA838-94FB-483C-8B22-E3039A51576C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Measurements", "Measurements\Measurements.csproj", "{3F572775-9044-49CF-BB86-49E111D502B1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MeasurementsUnitTests", "MeasurementsUnitTests\MeasurementsUnitTests.csproj", "{80A7259E-2B89-45BB-AD3C-E7E3104495BA}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3F572775-9044-49CF-BB86-49E111D502B1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3F572775-9044-49CF-BB86-49E111D502B1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3F572775-9044-49CF-BB86-49E111D502B1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3F572775-9044-49CF-BB86-49E111D502B1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{80A7259E-2B89-45BB-AD3C-E7E3104495BA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{80A7259E-2B89-45BB-AD3C-E7E3104495BA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{80A7259E-2B89-45BB-AD3C-E7E3104495BA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{80A7259E-2B89-45BB-AD3C-E7E3104495BA}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{80A7259E-2B89-45BB-AD3C-E7E3104495BA} = {5DBAA838-94FB-483C-8B22-E3039A51576C}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {28837FED-D944-45B1-9463-E8E0C2A8A4C2}
+	EndGlobalSection
+EndGlobal
