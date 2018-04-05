@@ -22,6 +22,9 @@ namespace Measurements
         public int Meters { get => (int)(Millimeters / MillimetersPerMeter); }
         public int Kilometers { get => (int)Millimeters / MillimetersPerKiloMeter; }
 
+        /// <summary>
+        /// Initializes a new instance of the distance structure to the specified distance in millimeters.
+        /// </summary>
         public Distance(long millimeters)
         {
             if (millimeters < 0 || millimeters > MaxMillimeters)
@@ -31,8 +34,14 @@ namespace Measurements
             Millimeters = millimeters;
         }
 
+        /// <summary>
+        /// Initializes a new instance of the distance structure to the specified distance in meters.
+        /// </summary>
         public Distance(int meters) : this(MillimetersPerMeter * (long)meters) { }
 
+        /// <summary>
+        /// Initializes a new instance of the distance structure to the specified distance in millimeters.
+        /// </summary>
         public static Distance FromMillimeters(long millimeters)
         {
             return new Distance(millimeters);
