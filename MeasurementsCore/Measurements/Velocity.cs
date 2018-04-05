@@ -2,7 +2,7 @@
 
 namespace Measurements
 {
-    public class Velocity
+    public struct Velocity
     {
         public const int MaxMetersPerSecond = 299792458;
         public static readonly Velocity SpeedOfLight = new Velocity(MaxMetersPerSecond);
@@ -63,6 +63,14 @@ namespace Measurements
                 throw new ArgumentOutOfRangeException(nameof(distance));
             }
             return TimeSpan.FromTicks(TimeSpan.TicksPerSecond * distance.Millimeters / this.distance.Millimeters);
+        }
+
+        /// <summary>
+        /// Get the timespan needed to cover the specified distance in meter with this velocity.
+        /// </summary>
+        public TimeSpan GetDuration(int distanceInMeter)
+        {
+            return GetDuration(new Distance(distanceInMeter));
         }
 
         public static TimeSpan operator /(Distance distance, Velocity velocity)
