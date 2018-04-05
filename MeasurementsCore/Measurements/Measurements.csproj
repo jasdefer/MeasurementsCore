@@ -2,6 +2,14 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <Authors>Justus Bonz</Authors>
+    <Company />
+    <PackageProjectUrl>https://github.com/jasdefer/MeasurementsCore</PackageProjectUrl>
+    <NeutralLanguage>en</NeutralLanguage>
+    <PackageTags>Measurements Measurement Distance Velocity</PackageTags>
+    <Description>A library containing representations for measurements like distance or velocity.</Description>
+    <PackageLicenseUrl>http://www.apache.org/licenses/LICENSE-2.0</PackageLicenseUrl>
+    <Version>1.0.1</Version>
   </PropertyGroup>
 
 </Project>
