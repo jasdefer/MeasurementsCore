@@ -138,6 +138,11 @@ namespace Measurements
             return new Velocity(v1.DistancePerSecond - v2.DistancePerSecond);
         }
 
+        public static Velocity operator /(Velocity velocity, int factor)
+        {
+            return new Velocity(velocity.DistancePerSecond / factor);
+        }
+
         public override bool Equals(object obj)
         {
             if (!(obj is Velocity)) return false;

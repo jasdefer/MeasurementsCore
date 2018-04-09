@@ -145,5 +145,15 @@ namespace MeasurementsUnitTests
             Assert.AreEqual(multiplier * 10, (velocity1 * multiplier).MetersPerSecond);
             Assert.AreEqual(multiplier * 10, (multiplier * velocity1).MetersPerSecond);
         }
+
+        [DataTestMethod]
+        [DataRow(1)]
+        [DataRow(2)]
+        [DataRow(3333333)]
+        public void Division(int divisor)
+        {
+            Velocity velocity1 = new Velocity(10);
+            Assert.AreEqual(10000 / divisor, (velocity1 / divisor).DistancePerSecond.Millimeters);
+        }
     }
 }
