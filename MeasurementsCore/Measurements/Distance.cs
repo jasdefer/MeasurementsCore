@@ -118,5 +118,16 @@ namespace Measurements
         {
             return new Distance(distance.Millimeters / divisor);
         }
+
+        public static Velocity operator /(Distance distance, TimeSpan timeSpan)
+        {
+            //Ensure that the duration calculation does not exceed the long.MaxValue limit
+            if (distance.Millimeters > long.MaxValue / TimeSpan.TicksPerSecond)
+            {
+                throw new ArgumentOutOfRangeException(nameof(distance));
+            }
+            Distance distancePerSecond = new Distance(TimeSpan.TicksPerSecond * distance.Millimeters / timeSpan.Ticks);
+            return new Velocity(distancePerSecond);
+        }
     }
 }
