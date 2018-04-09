@@ -84,5 +84,85 @@ namespace MeasurementsUnitTests
             Distance d1 = new Distance(19);
             Assert.IsFalse(d1.Equals(null));
         }
+
+        [DataTestMethod]
+        [DataRow(0)]
+        [DataRow(1)]
+        [DataRow(1000)]
+        public void Multiply(int multiplier)
+        {
+            Distance distance = new Distance(10);
+            Assert.AreEqual(10 * multiplier, (distance * multiplier).Meters);
+            Assert.AreEqual(10 * multiplier, (multiplier * distance).Meters);
+        }
+
+        [DataTestMethod]
+        [DataRow(-1)]
+        [DataRow(int.MaxValue)]
+        public void InvalidMultiply(int multiplier)
+        {
+            Distance distance = new Distance(10);
+            Assert.ThrowsException<ArgumentOutOfRangeException>(() => distance * multiplier);
+            Assert.ThrowsException<ArgumentOutOfRangeException>(() => multiplier * distance);
+        }
+
+        [DataTestMethod]
+        [DataRow(0)]
+        [DataRow(10)]
+        [DataRow(1000)]
+        public void Subtract(int meters)
+        {
+            Distance distance = new Distance(1000);
+            Distance result = distance - new Distance(meters);
+            Assert.AreEqual(result.Meters, distance.Meters - meters);
+        }
+
+        [TestMethod]
+        public void InvalidSubtraction()
+        {
+            Distance distance1 = new Distance(10);
+            Distance distance2 = new Distance(20);
+            Assert.ThrowsException<ArgumentOutOfRangeException>(() => distance1 - distance2);
+        }
+
+        [DataTestMethod]
+        [DataRow(1)]
+        [DataRow(2)]
+        [DataRow(3)]
+        [DataRow(10)]
+        [DataRow(333333)]
+        [DataRow(1000000)]
+        public void Division(int divisor)
+        {
+            Distance distance = new Distance(10);
+            Distance result = distance / divisor;
+            Assert.AreEqual(Math.Floor(distance.Millimeters*1d/divisor), result.Millimeters);
+        }
+
+        [DataTestMethod]
+        [DataRow(1)]
+        [DataRow(2)]
+        [DataRow(3)]
+        [DataRow(10)]
+        [DataRow(333333)]
+        [DataRow(1000000)]
+        public void GetVelocity(long millimeters)
+        {
+            Distance distance = new Distance(millimeters);
+            TimeSpan duration = TimeSpan.FromSeconds(1);
+
+            Velocity velocity = distance / duration;
+
+            Assert.AreEqual(TimeSpan.TicksPerSecond * millimeters / duration.Ticks, velocity.DistancePerSecond.Millimeters);
+        }
+
+        [TestMethod]
+        public void GetInvalidVelocity()
+        {
+            Distance distance = Distance.MaxValue;
+            TimeSpan duration = TimeSpan.FromSeconds(1);
+
+            Assert.ThrowsException<ArgumentOutOfRangeException>(() => distance / duration);
+        }
     }
 }
