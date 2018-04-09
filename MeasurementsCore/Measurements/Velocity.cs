@@ -118,6 +118,11 @@ namespace Measurements
             return v1.distance.Millimeters != v2.distance.Millimeters;
         }
 
+        public static Velocity operator +(Velocity v1, Velocity v2)
+        {
+            return new Velocity(v1.DistancePerSecond + v2.DistancePerSecond);
+        }
+
         public override bool Equals(object obj)
         {
             if (!(obj is Velocity)) return false;

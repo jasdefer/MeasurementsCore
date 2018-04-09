@@ -100,5 +100,17 @@ namespace MeasurementsUnitTests
             Assert.AreEqual(new TimeSpan(), velocity.GetDuration(0));
             Assert.ThrowsException<Exception>(() => velocity.GetDuration(1));
         }
+
+        [DataTestMethod]
+        [DataRow(0)]
+        [DataRow(1)]
+        [DataRow(2)]
+        [DataRow(3333333)]
+        public void TestAddition(int meters)
+        {
+            Velocity velocity1 = new Velocity(10);
+            Velocity velocity2 = new Velocity(meters);
+            Assert.AreEqual(meters + 10, (velocity1 + velocity2).MetersPerSecond);
+        }
     }
 }
