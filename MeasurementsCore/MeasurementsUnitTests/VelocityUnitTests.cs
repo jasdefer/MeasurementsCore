@@ -118,6 +118,27 @@ namespace MeasurementsUnitTests
         [DataRow(1)]
         [DataRow(2)]
         [DataRow(3333333)]
+        public void Subtraction(int meters)
+        {
+            Velocity velocity1 = new Velocity(3333333);
+            Velocity velocity2 = new Velocity(meters);
+            Assert.AreEqual(3333333 - meters, (velocity1 - velocity2).MetersPerSecond);
+        }
+
+        [TestMethod]
+        public void InvalidSubtraction()
+        {
+            Velocity velocity1 = new Velocity(10);
+            Velocity velocity2 = new Velocity(20);
+
+            Assert.ThrowsException<ArgumentOutOfRangeException>(() => velocity1 - velocity2);
+        }
+
+        [DataTestMethod]
+        [DataRow(0)]
+        [DataRow(1)]
+        [DataRow(2)]
+        [DataRow(3333333)]
         public void Multiplication(int multiplier)
         {
             Velocity velocity1 = new Velocity(10);
