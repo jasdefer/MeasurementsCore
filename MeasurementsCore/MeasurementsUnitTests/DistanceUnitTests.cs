@@ -124,5 +124,19 @@ namespace MeasurementsUnitTests
             Distance distance2 = new Distance(20);
             Assert.ThrowsException<ArgumentOutOfRangeException>(() => distance1 - distance2);
         }
+
+        [DataTestMethod]
+        [DataRow(1)]
+        [DataRow(2)]
+        [DataRow(3)]
+        [DataRow(10)]
+        [DataRow(333333)]
+        [DataRow(1000000)]
+        public void Division(int divisor)
+        {
+            Distance distance = new Distance(10);
+            Distance result = distance / divisor;
+            Assert.AreEqual(Math.Floor(distance.Millimeters*1d/divisor), result.Millimeters);
+        }
     }
 }

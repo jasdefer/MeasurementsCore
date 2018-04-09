@@ -113,5 +113,10 @@ namespace Measurements
         {
             return FromMillimeters(distanceOne.Millimeters - distanceTwo.Millimeters);
         }
+
+        public static Distance operator / (Distance distance, int divisor)
+        {
+            return new Distance(distance.Millimeters / divisor);
+        }
     }
 }
