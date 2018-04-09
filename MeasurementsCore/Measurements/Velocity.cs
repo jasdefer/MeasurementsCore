@@ -50,6 +50,11 @@ namespace Measurements
         public int MetersPerSecond => distance.Meters;
 
         /// <summary>
+        /// Get the velocity in the distance per second.
+        /// </summary>
+        public Distance DistancePerSecond => distance;
+
+        /// <summary>
         /// Get the timespan needed to cover the specified distance with this velocity.
         /// </summary>
         public TimeSpan GetDuration(Distance distance)
@@ -75,7 +80,12 @@ namespace Measurements
 
         public static TimeSpan operator /(Distance distance, Velocity velocity)
         {
-            return TimeSpan.FromTicks(TimeSpan.TicksPerSecond * distance.Meters / velocity.distance.Meters);
+            //Ensure that the duration calculation does not exceed the long.MaxValue limit
+            if (distance.Millimeters > long.MaxValue / TimeSpan.TicksPerSecond)
+            {
+                throw new ArgumentOutOfRangeException(nameof(distance));
+            }
+            return TimeSpan.FromTicks(TimeSpan.TicksPerSecond * distance.Millimeters / velocity.distance.Millimeters);
         }
 
         public static bool operator <(Velocity v1, Velocity v2)

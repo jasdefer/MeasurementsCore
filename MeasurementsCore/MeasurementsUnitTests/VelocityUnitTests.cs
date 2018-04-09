@@ -80,12 +80,17 @@ namespace MeasurementsUnitTests
         [DataTestMethod]
         [DataRow(1)]
         [DataRow(2)]
+        [DataRow(3)]
         [DataRow(10)]
-        [DataRow(Velocity.MaxMetersPerSecond)]
-        public void GetDurationTest(int metersPerSecond)
+        [DataRow(1250)]
+        [DataRow(3333)]
+        [DataRow(922337203685)]
+        public void GetDurationTest(long distanceInMillimeters)
         {
-            Velocity velocity = new Velocity(metersPerSecond);
-            Assert.AreEqual(TimeSpan.FromSeconds(1), velocity.GetDuration(metersPerSecond));
+            Distance distance = new Distance(distanceInMillimeters);
+            Velocity velocity = new Velocity(new Distance((long)2450));
+            TimeSpan duration = distance / velocity;
+            Assert.AreEqual(Math.Round(1000 * distanceInMillimeters / 2450d, 4), duration.TotalMilliseconds, 0.0002);
         }
 
         [TestMethod]
