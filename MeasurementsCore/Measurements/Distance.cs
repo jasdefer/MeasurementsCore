@@ -108,5 +108,10 @@ namespace Measurements
         {
             return distance * multiplier;
         }
+
+        public static Distance operator -(Distance distanceOne, Distance distanceTwo)
+        {
+            return FromMillimeters(distanceOne.Millimeters - distanceTwo.Millimeters);
+        }
     }
 }

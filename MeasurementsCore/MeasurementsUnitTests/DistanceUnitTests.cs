@@ -105,5 +105,24 @@ namespace MeasurementsUnitTests
             Assert.ThrowsException<ArgumentOutOfRangeException>(() => distance * multiplier);
             Assert.ThrowsException<ArgumentOutOfRangeException>(() => multiplier * distance);
         }
+
+        [DataTestMethod]
+        [DataRow(0)]
+        [DataRow(10)]
+        [DataRow(1000)]
+        public void Subtract(int meters)
+        {
+            Distance distance = new Distance(1000);
+            Distance result = distance - new Distance(meters);
+            Assert.AreEqual(result.Meters, distance.Meters - meters);
+        }
+
+        [TestMethod]
+        public void InvalidSubtraction()
+        {
+            Distance distance1 = new Distance(10);
+            Distance distance2 = new Distance(20);
+            Assert.ThrowsException<ArgumentOutOfRangeException>(() => distance1 - distance2);
+        }
     }
 }
