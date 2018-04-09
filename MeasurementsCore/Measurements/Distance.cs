@@ -100,7 +100,13 @@ namespace Measurements
 
         public static Distance operator *(Distance distance, int multiplier)
         {
+            if (multiplier < 0) throw new ArgumentOutOfRangeException(nameof(multiplier));
             return FromMillimeters(distance.Millimeters * multiplier);
+        }
+
+        public static Distance operator *(int multiplier, Distance distance)
+        {
+            return distance * multiplier;
         }
     }
 }

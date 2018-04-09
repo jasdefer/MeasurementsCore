@@ -84,5 +84,26 @@ namespace MeasurementsUnitTests
             Distance d1 = new Distance(19);
             Assert.IsFalse(d1.Equals(null));
         }
+
+        [DataTestMethod]
+        [DataRow(0)]
+        [DataRow(1)]
+        [DataRow(1000)]
+        public void Multiply(int multiplier)
+        {
+            Distance distance = new Distance(10);
+            Assert.AreEqual(10 * multiplier, (distance * multiplier).Meters);
+            Assert.AreEqual(10 * multiplier, (multiplier * distance).Meters);
+        }
+
+        [DataTestMethod]
+        [DataRow(-1)]
+        [DataRow(int.MaxValue)]
+        public void InvalidMultiply(int multiplier)
+        {
+            Distance distance = new Distance(10);
+            Assert.ThrowsException<ArgumentOutOfRangeException>(() => distance * multiplier);
+            Assert.ThrowsException<ArgumentOutOfRangeException>(() => multiplier * distance);
+        }
     }
 }
