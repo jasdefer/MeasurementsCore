@@ -138,5 +138,31 @@ namespace MeasurementsUnitTests
             Distance result = distance / divisor;
             Assert.AreEqual(Math.Floor(distance.Millimeters*1d/divisor), result.Millimeters);
         }
+
+        [DataTestMethod]
+        [DataRow(1)]
+        [DataRow(2)]
+        [DataRow(3)]
+        [DataRow(10)]
+        [DataRow(333333)]
+        [DataRow(1000000)]
+        public void GetVelocity(long millimeters)
+        {
+            Distance distance = new Distance(millimeters);
+            TimeSpan duration = TimeSpan.FromSeconds(1);
+
+            Velocity velocity = distance / duration;
+
+            Assert.AreEqual(TimeSpan.TicksPerSecond * millimeters / duration.Ticks, velocity.DistancePerSecond.Millimeters);
+        }
+
+        [TestMethod]
+        public void GetInvalidVelocity()
+        {
+            Distance distance = Distance.MaxValue;
+            TimeSpan duration = TimeSpan.FromSeconds(1);
+
+            Assert.ThrowsException<ArgumentOutOfRangeException>(() => distance / duration);
+        }
     }
 }
