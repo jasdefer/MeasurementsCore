@@ -122,6 +122,16 @@ namespace Measurements
         {
             return new Velocity(v1.DistancePerSecond + v2.DistancePerSecond);
         }
+        
+        public static Velocity operator *(Velocity velocity, int multiplier)
+        {
+            return new Velocity(velocity.DistancePerSecond * multiplier);
+        }
+
+        public static Velocity operator *(int multiplier, Velocity velocity)
+        {
+            return velocity * multiplier;
+        }
 
         public override bool Equals(object obj)
         {

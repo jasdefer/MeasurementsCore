@@ -106,11 +106,23 @@ namespace MeasurementsUnitTests
         [DataRow(1)]
         [DataRow(2)]
         [DataRow(3333333)]
-        public void TestAddition(int meters)
+        public void Addition(int meters)
         {
             Velocity velocity1 = new Velocity(10);
             Velocity velocity2 = new Velocity(meters);
             Assert.AreEqual(meters + 10, (velocity1 + velocity2).MetersPerSecond);
+        }
+
+        [DataTestMethod]
+        [DataRow(0)]
+        [DataRow(1)]
+        [DataRow(2)]
+        [DataRow(3333333)]
+        public void Multiplication(int multiplier)
+        {
+            Velocity velocity1 = new Velocity(10);
+            Assert.AreEqual(multiplier * 10, (velocity1 * multiplier).MetersPerSecond);
+            Assert.AreEqual(multiplier * 10, (multiplier * velocity1).MetersPerSecond);
         }
     }
 }
