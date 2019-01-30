@@ -9,24 +9,10 @@ namespace MeasurementsUnitTests
     {
         [DataTestMethod]
         [DataRow(-1)]
-        [DataRow(long.MaxValue)]
-        public void InvalidDistances(long millimeters)
+        [DataRow(double.MaxValue/1000)]
+        public void InvalidDistances(double meters)
         {
-            Assert.ThrowsException<ArgumentOutOfRangeException>(() => Distance.FromMillimeters(millimeters));
-        }
-
-        [TestMethod]
-        public void ExceedingMaximumDistance()
-        {
-            long millimeters = (long)int.MaxValue * 1000 + 1;
-            Assert.ThrowsException<ArgumentOutOfRangeException>(() => new Distance(millimeters));
-        }
-
-        [TestMethod]
-        public void MaxValidDistance()
-        {
-            Distance distance = new Distance((long)int.MaxValue  * 1000);
-            Assert.AreEqual(int.MaxValue, distance.Meters);
+            Assert.ThrowsException<ArgumentOutOfRangeException>(() => new Distance(meters));
         }
 
         [TestMethod]
@@ -36,21 +22,36 @@ namespace MeasurementsUnitTests
             Assert.AreEqual(0, distance.Millimeters);
         }
 
-        [TestMethod]
-        public void ConstructorFromMeter()
+        [DataTestMethod]
+        [DataRow(0)]
+        [DataRow(1.5)]
+        [DataRow(double.MaxValue/10000)]
+        public void ConstructorFromMeter(double meters)
         {
-            int millimeters = 15000;
-            Distance distanceFromMeters = new Distance(millimeters/1000);
-            Assert.AreEqual(millimeters, distanceFromMeters.Millimeters);
+            Distance distanceFromMeters = new Distance(meters);
+            Assert.AreEqual(meters, distanceFromMeters.Meters);
         }
 
-        [TestMethod]
-        public void ConstructorFromMillimeter()
+        [DataTestMethod]
+        [DataRow(0)]
+        [DataRow(1.5)]
+        [DataRow(double.MaxValue / 10)]
+        public void ConstructorFromMillimeter(double millimeters)
         {
-            long millimeters = 1500;
-            Distance distanceFromMeters = new Distance(millimeters);
-            Assert.AreEqual(millimeters, distanceFromMeters.Millimeters);
+            Distance distanceFromMillimeters = Distance.FromMillimeters(millimeters);
+            Assert.AreEqual(millimeters, distanceFromMillimeters.Millimeters);
         }
+
+        [DataTestMethod]
+        [DataRow(0)]
+        [DataRow(1.5)]
+        [DataRow(double.MaxValue/10000000)]
+        public void ConstructorFromKilometers(double kilometers)
+        {
+            Distance distanceFromKiloMeters = Distance.FromKilometers(kilometers);
+            Assert.AreEqual(kilometers, distanceFromKiloMeters.Kilometers);
+        }
+
 
         [TestMethod]
         public void CompareUnequal()
@@ -96,14 +97,12 @@ namespace MeasurementsUnitTests
             Assert.AreEqual(10 * multiplier, (multiplier * distance).Meters);
         }
 
-        [DataTestMethod]
-        [DataRow(-1)]
-        [DataRow(int.MaxValue)]
-        public void InvalidMultiply(int multiplier)
+        [TestMethod]
+        public void InvalidMultiply()
         {
             Distance distance = new Distance(10);
-            Assert.ThrowsException<ArgumentOutOfRangeException>(() => distance * multiplier);
-            Assert.ThrowsException<ArgumentOutOfRangeException>(() => multiplier * distance);
+            Assert.ThrowsException<ArgumentOutOfRangeException>(() => distance * -1);
+            Assert.ThrowsException<ArgumentOutOfRangeException>(() => -1 * distance);
         }
 
         [DataTestMethod]
@@ -127,33 +126,25 @@ namespace MeasurementsUnitTests
 
         [DataTestMethod]
         [DataRow(1)]
-        [DataRow(2)]
-        [DataRow(3)]
-        [DataRow(10)]
-        [DataRow(333333)]
-        [DataRow(1000000)]
-        public void Division(int divisor)
+        [DataRow(2.5)]
+        public void Division(double divisor)
         {
             Distance distance = new Distance(10);
             Distance result = distance / divisor;
-            Assert.AreEqual(Math.Floor(distance.Millimeters*1d/divisor), result.Millimeters);
+            Assert.AreEqual(distance.Meters/divisor, result.Meters);
         }
 
         [DataTestMethod]
         [DataRow(1)]
-        [DataRow(2)]
-        [DataRow(3)]
-        [DataRow(10)]
-        [DataRow(333333)]
-        [DataRow(1000000)]
-        public void GetVelocity(long millimeters)
+        [DataRow(10000.5)]
+        public void GetVelocity(double meters)
         {
-            Distance distance = new Distance(millimeters);
+            Distance distance = new Distance(meters);
             TimeSpan duration = TimeSpan.FromSeconds(1);
 
             Velocity velocity = distance / duration;
 
-            Assert.AreEqual(TimeSpan.TicksPerSecond * millimeters / duration.Ticks, velocity.DistancePerSecond.Millimeters);
+            Assert.AreEqual(TimeSpan.TicksPerSecond * meters / duration.Ticks, velocity.DistancePerSecond.Meters);
         }
 
         [TestMethod]
