@@ -2,6 +2,9 @@
 
 namespace Measurements
 {
+    /// <summary>
+    /// Represents a weight.
+    /// </summary>
     public struct Weight
     {
         private const double MAX_GRAM = double.MaxValue/1000;
@@ -14,6 +17,10 @@ namespace Measurements
         public static readonly Weight MAX = new Weight(MAX_GRAM);
         public static readonly Weight MIN = new Weight(MIN_GRAM);
 
+        /// <summary>
+        /// Initializes a new instance of the weight structure to the specified weight in grams.
+        /// </summary>
+        /// <param name="gram">The weight in grams.</param>
         public Weight(double gram)
         {
             if(gram< MIN_GRAM || gram > MAX_GRAM)
@@ -23,11 +30,17 @@ namespace Measurements
             Gram = gram;
         }
 
+        /// <summary>
+        /// Initializes a new instance of the weight structure to the specified weight in kilograms.
+        /// </summary>
+        /// <param name="kilograms"></param>
+        /// <returns></returns>
         public static Weight FromKilograms(double kilograms)
         {
             return new Weight(kilograms * 1000);
         }
 
+        /// Initializes a new instance of the weight structure to the specified weight in metric tons.
         public static Weight FromMetricTons(double metricTons)
         {
             return new Weight(metricTons * 1000000);
