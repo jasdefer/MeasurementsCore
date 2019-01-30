@@ -81,5 +81,14 @@ namespace MeasurementsUnitTests
             var velocity = acceleration * time;
             Assert.AreEqual(10, velocity.MetersPerSecond);
         }
+
+        [TestMethod]
+        public void Force()
+        {
+            var acceleration = new Acceleration(new Distance(3));
+            var weight = Weight.FromKilograms(4);
+            var force = weight * acceleration;
+            Assert.AreEqual(12, force.Newton);
+        }
     }
 }
