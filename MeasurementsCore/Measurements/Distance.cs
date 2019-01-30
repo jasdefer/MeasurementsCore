@@ -7,44 +7,47 @@ namespace Measurements
         /// <summary>
         /// Ensures, that the meter representation in int is still valid
         /// </summary>
-        public const long MaxMillimeters = (long)MillimetersPerMeter * int.MaxValue;
-        public const long MinMillimeters = 0;
+        private const double MAX_METERS = double.MaxValue / 10000;
+        private const double MIN_METERS = 0;
 
-        public const int MillimetersPerCentimeter = 10;
-        public const int MillimetersPerMeter = 1000;
-        public const int MillimetersPerKiloMeter = 1000000;
+        public static Distance MinValue = new Distance(MIN_METERS);
+        public static Distance MaxValue = new Distance(MAX_METERS);
 
-        public static Distance MinValue = new Distance(MinMillimeters);
-        public static Distance MaxValue = new Distance(MaxMillimeters);
+        public const int MILLIMETERS_PER_METER = 1000;
+        public const int CENTIMETERS_PER_METER = 100;
+        public const int METERS_PER_KILOMETER = 1000;
 
-        public long Millimeters { get; }
-        public long Centimeters { get => Millimeters / MillimetersPerCentimeter; }
-        public int Meters { get => (int)(Millimeters / MillimetersPerMeter); }
-        public int Kilometers { get => (int)Millimeters / MillimetersPerKiloMeter; }
-
-        /// <summary>
-        /// Initializes a new instance of the distance structure to the specified distance in millimeters.
-        /// </summary>
-        public Distance(long millimeters)
-        {
-            if (millimeters < 0 || millimeters > MaxMillimeters)
-            {
-                throw new ArgumentOutOfRangeException("Invalid Distance");
-            }
-            Millimeters = millimeters;
-        }
+        public double Millimeters => Meters * MILLIMETERS_PER_METER;
+        public double Centimeters => Meters * CENTIMETERS_PER_METER;
+        public double Meters { get; }
+        public double Kilometers => Meters / METERS_PER_KILOMETER;
 
         /// <summary>
         /// Initializes a new instance of the distance structure to the specified distance in meters.
         /// </summary>
-        public Distance(int meters) : this(MillimetersPerMeter * (long)meters) { }
+        public Distance(double meters)
+        {
+            if (meters < MIN_METERS || meters > MAX_METERS)
+            {
+                throw new ArgumentOutOfRangeException("Invalid Distance");
+            }
+            Meters = meters;
+        }
 
         /// <summary>
         /// Initializes a new instance of the distance structure to the specified distance in millimeters.
         /// </summary>
-        public static Distance FromMillimeters(long millimeters)
+        public static Distance FromMillimeters(double millimeters)
         {
-            return new Distance(millimeters);
+            return new Distance(millimeters/1000);
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the distance structure to the specified distance in kilometers.
+        /// </summary>
+        public static Distance FromKilometers(double kilometers)
+        {
+            return new Distance(kilometers * 1000);
         }
 
         public override string ToString()
@@ -60,73 +63,76 @@ namespace Measurements
 
         public static bool operator ==(Distance distance1, Distance distance2)
         {
-            return distance1.Millimeters == distance2.Millimeters;
+            return distance1.Meters == distance2.Meters;
         }
 
         public static bool operator !=(Distance distance1, Distance distance2)
         {
-            return distance1.Millimeters != distance2.Millimeters;
+            return distance1.Meters != distance2.Meters;
         }
 
         public override int GetHashCode()
         {
-            return Millimeters.GetHashCode();
+            return Meters.GetHashCode();
         }
 
         public static bool operator <(Distance distanceOne, Distance distanceTwo)
         {
-            return distanceOne.Millimeters < distanceTwo.Millimeters;
+            return distanceOne.Meters < distanceTwo.Meters;
         }
 
         public static bool operator >(Distance distanceOne, Distance distanceTwo)
         {
-            return distanceOne.Millimeters > distanceTwo.Millimeters;
+            return distanceOne.Meters > distanceTwo.Meters;
         }
 
         public static bool operator <=(Distance distanceOne, Distance distanceTwo)
         {
-            return distanceOne.Millimeters <= distanceTwo.Millimeters;
+            return distanceOne.Meters <= distanceTwo.Meters;
         }
 
         public static bool operator >=(Distance distanceOne, Distance distanceTwo)
         {
-            return distanceOne.Millimeters >= distanceTwo.Millimeters;
+            return distanceOne.Meters >= distanceTwo.Meters;
         }
 
         public static Distance operator +(Distance distanceOne, Distance distanceTwo)
         {
-            return FromMillimeters(distanceOne.Millimeters + distanceTwo.Millimeters);
+            return new Distance(distanceOne.Meters + distanceTwo.Meters);
+        }
+
+        public static Distance operator *(Distance distance, double multiplier)
+        {
+            if (multiplier < 0) throw new ArgumentOutOfRangeException(nameof(multiplier));
+            return new Distance(distance.Meters * multiplier);
         }
 
         public static Distance operator *(Distance distance, int multiplier)
         {
             if (multiplier < 0) throw new ArgumentOutOfRangeException(nameof(multiplier));
-            return FromMillimeters(distance.Millimeters * multiplier);
+            return new Distance(distance.Meters * multiplier);
         }
 
         public static Distance operator *(int multiplier, Distance distance)
         {
-            return distance * multiplier;
+            if (multiplier < 0) throw new ArgumentOutOfRangeException(nameof(multiplier));
+            return new Distance(distance.Meters * multiplier);
         }
 
         public static Distance operator -(Distance distanceOne, Distance distanceTwo)
         {
-            return FromMillimeters(distanceOne.Millimeters - distanceTwo.Millimeters);
+            return new Distance(distanceOne.Meters - distanceTwo.Meters);
         }
 
-        public static Distance operator / (Distance distance, int divisor)
+        public static Distance operator /(Distance distance, double divisor)
         {
-            return new Distance(distance.Millimeters / divisor);
+            if (divisor < 0) throw new ArgumentOutOfRangeException(nameof(divisor));
+            return new Distance(distance.Meters / divisor);
         }
 
         public static Velocity operator /(Distance distance, TimeSpan timeSpan)
         {
-            //Ensure that the duration calculation does not exceed the long.MaxValue limit
-            if (distance.Millimeters > long.MaxValue / TimeSpan.TicksPerSecond)
-            {
-                throw new ArgumentOutOfRangeException(nameof(distance));
-            }
-            Distance distancePerSecond = new Distance(TimeSpan.TicksPerSecond * distance.Millimeters / timeSpan.Ticks);
+            Distance distancePerSecond = new Distance(TimeSpan.TicksPerSecond * distance.Meters / timeSpan.Ticks);
             return new Velocity(distancePerSecond);
         }
     }

@@ -39,20 +39,7 @@ namespace MeasurementsUnitTests
             Distance distance = new Distance(meters);
             TimeSpan deltaTime = TimeSpan.FromSeconds(seconds);
             Velocity velocity = new Velocity(distance, deltaTime);
-            Assert.AreEqual(meters/ seconds, velocity.MetersPerSecond);
-        }
-
-        [TestMethod]
-        public void InitializeMaxByDistanceAndTime()
-        {
-            long millimeters = long.MaxValue / TimeSpan.TicksPerSecond;
-            Distance distance = new Distance(millimeters);
-
-            //Ensure that the speed of light is not exceeded
-            TimeSpan deltaTime = TimeSpan.FromSeconds(millimeters/1000);
-
-            Velocity velocity = new Velocity(distance, deltaTime);
-            Assert.AreEqual(1, velocity.MetersPerSecond);
+            Assert.AreEqual(meters/ (double)seconds, velocity.MetersPerSecond);
         }
 
         [TestMethod]
@@ -72,7 +59,7 @@ namespace MeasurementsUnitTests
         [TestMethod]
         public void TooLargeVelocityDistanceAndVelocity()
         {
-            Distance distance = new Distance((long)Velocity.MaxMetersPerSecond * Distance.MillimetersPerMeter + 1);
+            Distance distance = new Distance((long)Velocity.MaxMetersPerSecond * Distance.MILLIMETERS_PER_METER + 1);
             TimeSpan deltaTime = TimeSpan.FromSeconds(1);
             Assert.ThrowsException<ArgumentOutOfRangeException>(() => new Velocity(distance, deltaTime));
         }
@@ -153,7 +140,7 @@ namespace MeasurementsUnitTests
         public void Division(int divisor)
         {
             Velocity velocity1 = new Velocity(10);
-            Assert.AreEqual(10000 / divisor, (velocity1 / divisor).DistancePerSecond.Millimeters);
+            Assert.AreEqual(10d / divisor, (velocity1 / divisor).DistancePerSecond.Meters);
         }
     }
 }
