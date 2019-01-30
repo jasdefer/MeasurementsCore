@@ -1,8 +1,16 @@
-﻿namespace Measurements
+﻿using System;
+
+namespace Measurements
 {
     public struct Work
     {
         public double Joule { get; }
+
+        public double WattHour => Joule / 36000;
+
+        public double KilowattHour => Joule / 36000000;
+
+        public double MegawattHour => Joule / 36000000000;
 
         public Work(double joule)
         {
@@ -55,29 +63,34 @@
             return f1.Joule >= f2.Joule;
         }
 
-        public static Force operator +(Work f1, Work f2)
+        public static Work operator +(Work f1, Work f2)
         {
-            return new Force(f1.Joule + f2.Joule);
+            return new Work(f1.Joule + f2.Joule);
         }
 
-        public static Force operator -(Work f1, Work f2)
+        public static Work operator -(Work f1, Work f2)
         {
-            return new Force(f1.Joule - f2.Joule);
+            return new Work(f1.Joule - f2.Joule);
         }
 
-        public static Force operator *(Work f1, double multiplicator)
+        public static Work operator *(Work f1, double multiplicator)
         {
-            return new Force(f1.Joule * multiplicator);
+            return new Work(f1.Joule * multiplicator);
         }
 
-        public static Force operator /(Work f1, double divisor)
+        public static Work operator /(Work f1, double divisor)
         {
-            return new Force(f1.Joule / divisor);
+            return new Work(f1.Joule / divisor);
         }
 
         public static double operator /(Work f1, Work f2)
         {
             return f1.Joule / f2.Joule;
+        }
+
+        public static Power operator /(Work work, TimeSpan time)
+        {
+            return new Power(work.Joule/time.TotalSeconds);
         }
     }
 }

@@ -93,5 +93,10 @@ namespace Measurements
         {
             return new Velocity(acceleration.DistancePerSecondSquared * time.TotalSeconds);
         }
+
+        public static Force operator *(Weight weight, Acceleration acceleration)
+        {
+            return new Force(weight.Kilogram * acceleration.DistancePerSecondSquared.Meters);
+        }
     }
 }
