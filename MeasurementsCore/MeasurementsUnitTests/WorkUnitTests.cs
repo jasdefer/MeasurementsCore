@@ -69,5 +69,33 @@ namespace MeasurementsUnitTests
             var result = w1 / w2;
             Assert.AreEqual(5, result);
         }
+
+        [TestMethod]
+        public void ToWattHours()
+        {
+            var work = new Work(36);
+            Assert.AreEqual(0.01, work.WattHour);
+        }
+
+        [TestMethod]
+        public void ToKilowattHours()
+        {
+            var work = new Work(36000);
+            Assert.AreEqual(0.01, work.KilowattHour);
+        }
+
+        [TestMethod]
+        public void ToMegawattHours()
+        {
+            var work = new Work(36000000);
+            Assert.AreEqual(0.01, work.MegawattHour);
+        }
+
+        [TestMethod]
+        public void FromKilowattHours()
+        {
+            var work = Work.FromKiloWatt(1);
+            Assert.AreEqual(1, work.KilowattHour);
+        }
     }
 }

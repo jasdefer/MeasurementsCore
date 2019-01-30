@@ -6,16 +6,25 @@ namespace Measurements
     {
         public Distance DistancePerSecondSquared { get; }
 
+        /// <summary>
+        /// Initializes a new instance of the acceleration structure to the specified distance per square seconds.
+        /// </summary>
         public Acceleration(Distance distancePerSecondSquared)
         {
             DistancePerSecondSquared = distancePerSecondSquared;
         }
 
+        /// <summary>
+        /// Initializes a new instance of the acceleration structure to the specified meters per square seconds.
+        /// </summary>
         public static Acceleration FromMetersPerSecondSquared(double meters)
         {
             return new Acceleration(new Distance(meters));
         }
 
+        /// <summary>
+        /// Initializes a new instance of the acceleration structure to the specified millimeters per square seconds.
+        /// </summary>
         public static Acceleration FromMillimetersPerSecondSquared(double millimeters)
         {
             return new Acceleration(Distance.FromMillimeters(millimeters));
@@ -28,9 +37,7 @@ namespace Measurements
 
         public override int GetHashCode()
         {
-            //Prevent a distance from having the same hash as the acceleration
-            var tempHash = DistancePerSecondSquared.GetHashCode();
-            return tempHash ^ tempHash;
+            return nameof(Acceleration).GetHashCode() ^ DistancePerSecondSquared.GetHashCode();
         }
 
         public override bool Equals(object obj)

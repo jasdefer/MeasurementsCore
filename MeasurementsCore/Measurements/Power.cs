@@ -4,6 +4,9 @@
     {
         public double Watt { get; }
 
+        /// <summary>
+        /// Initializes a new instance of the power structure to the specified power in watt.
+        /// </summary>
         public Power(double newton)
         {
             Watt = newton;

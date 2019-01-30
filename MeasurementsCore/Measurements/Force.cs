@@ -4,6 +4,9 @@
     {
         public double Newton { get; }
 
+        /// <summary>
+        /// Initializes a new instance of the force structure to the specified force in newtons.
+        /// </summary>
         public Force(double newton)
         {
             Newton = newton;

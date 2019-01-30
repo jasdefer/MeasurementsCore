@@ -6,15 +6,26 @@ namespace Measurements
     {
         public double Joule { get; }
 
-        public double WattHour => Joule / 36000;
+        public double WattHour => Joule / 3600;
 
-        public double KilowattHour => Joule / 36000000;
+        public double KilowattHour => Joule / 3600000;
 
-        public double MegawattHour => Joule / 36000000000;
+        public double MegawattHour => Joule / 3600000000;
 
+        /// <summary>
+        /// Initializes a new instance of the work structure to the specified work in joule.
+        /// </summary>
         public Work(double joule)
         {
             Joule = joule;
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the work structure to the specified work in kilowatt hours.
+        /// </summary>
+        public static Work FromKiloWatt(double kilowattHours)
+        {
+            return new Work(kilowattHours * 3600000);
         }
 
         public override string ToString()
