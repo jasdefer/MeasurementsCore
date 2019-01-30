@@ -9,9 +9,10 @@
     <PackageTags>Measurements Measurement Distance Velocity</PackageTags>
     <Description>A library containing representations for measurements like distance or velocity.</Description>
     <PackageLicenseUrl>http://www.apache.org/licenses/LICENSE-2.0</PackageLicenseUrl>
-    <Version>1.1.0</Version>
+    <Version>1.2.0</Version>
     <PackageId>MeasurementsCore</PackageId>
     <Product>MeasurementsCore</Product>
+    <PackageReleaseNotes>Added weight and angle measurements.</PackageReleaseNotes>
   </PropertyGroup>
 
 </Project>
