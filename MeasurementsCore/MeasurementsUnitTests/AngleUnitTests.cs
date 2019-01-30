@@ -5,7 +5,7 @@ using System;
 namespace MeasurementsUnitTests
 {
     [TestClass]
-    public class AngleTests
+    public class AngleUnitTests
     {
         [DataTestMethod]
         [DataRow(-1)]
