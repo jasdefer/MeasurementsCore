@@ -11,7 +11,12 @@ namespace Measurements
             DistancePerSecondSquared = distancePerSecondSquared;
         }
 
-        public static Acceleration FromMillimetersPerSecondSquared(long millimeters)
+        public static Acceleration FromMetersPerSecondSquared(double meters)
+        {
+            return new Acceleration(new Distance(meters));
+        }
+
+        public static Acceleration FromMillimetersPerSecondSquared(double millimeters)
         {
             return new Acceleration(Distance.FromMillimeters(millimeters));
         }
