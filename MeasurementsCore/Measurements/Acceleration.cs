@@ -4,14 +4,22 @@ namespace Measurements
 {
     public struct Acceleration
     {
-        public Distance DistancePerSecondSquared { get; }
+        public double MetersPerSecondSquared { get; }
 
         /// <summary>
         /// Initializes a new instance of the acceleration structure to the specified distance per square seconds.
         /// </summary>
         public Acceleration(Distance distancePerSecondSquared)
         {
-            DistancePerSecondSquared = distancePerSecondSquared;
+            MetersPerSecondSquared = distancePerSecondSquared.Meters;
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the acceleration structure to the specified meters per square seconds.
+        /// </summary>
+        public Acceleration(double metersPerSecondSquared)
+        {
+            MetersPerSecondSquared = metersPerSecondSquared;
         }
 
         /// <summary>
@@ -32,12 +40,12 @@ namespace Measurements
 
         public override string ToString()
         {
-            return $"{DistancePerSecondSquared.Meters}m/s²";
+            return $"{MetersPerSecondSquared}m/s²";
         }
 
         public override int GetHashCode()
         {
-            return nameof(Acceleration).GetHashCode() ^ DistancePerSecondSquared.GetHashCode();
+            return nameof(Acceleration).GetHashCode() ^ MetersPerSecondSquared.GetHashCode();
         }
 
         public override bool Equals(object obj)
@@ -48,7 +56,7 @@ namespace Measurements
 
         public static bool operator ==(Acceleration a1, Acceleration a2)
         {
-            return a1.DistancePerSecondSquared == a2.DistancePerSecondSquared;
+            return a1.MetersPerSecondSquared == a2.MetersPerSecondSquared;
         }
 
         public static bool operator !=(Acceleration a1, Acceleration a2)
@@ -58,52 +66,52 @@ namespace Measurements
 
         public static bool operator <(Acceleration a1, Acceleration a2)
         {
-            return a1.DistancePerSecondSquared < a2.DistancePerSecondSquared;
+            return a1.MetersPerSecondSquared < a2.MetersPerSecondSquared;
         }
 
         public static bool operator <=(Acceleration a1, Acceleration a2)
         {
-            return a1.DistancePerSecondSquared <= a2.DistancePerSecondSquared;
+            return a1.MetersPerSecondSquared <= a2.MetersPerSecondSquared;
         }
 
         public static bool operator >(Acceleration a1, Acceleration a2)
         {
-            return a1.DistancePerSecondSquared > a2.DistancePerSecondSquared;
+            return a1.MetersPerSecondSquared > a2.MetersPerSecondSquared;
         }
 
         public static bool operator >=(Acceleration a1, Acceleration a2)
         {
-            return a1.DistancePerSecondSquared >= a2.DistancePerSecondSquared;
+            return a1.MetersPerSecondSquared >= a2.MetersPerSecondSquared;
         }
 
         public static Acceleration operator +(Acceleration a1, Acceleration a2)
         {
-            return new Acceleration(a1.DistancePerSecondSquared + a2.DistancePerSecondSquared);
+            return new Acceleration(a1.MetersPerSecondSquared + a2.MetersPerSecondSquared);
         }
 
         public static Acceleration operator -(Acceleration a1, Acceleration a2)
         {
-            return new Acceleration(a1.DistancePerSecondSquared - a2.DistancePerSecondSquared);
+            return new Acceleration(a1.MetersPerSecondSquared - a2.MetersPerSecondSquared);
         }
 
         public static Acceleration operator *(Acceleration a1, double multiplicator)
         {
-            return new Acceleration(a1.DistancePerSecondSquared * multiplicator);
+            return new Acceleration(a1.MetersPerSecondSquared * multiplicator);
         }
 
         public static Acceleration operator /(Acceleration a1, double divisor)
         {
-            return new Acceleration(a1.DistancePerSecondSquared / divisor);
+            return new Acceleration(a1.MetersPerSecondSquared / divisor);
         }
 
         public static Velocity operator *(Acceleration acceleration, TimeSpan time)
         {
-            return new Velocity(acceleration.DistancePerSecondSquared * time.TotalSeconds);
+            return new Velocity(acceleration.MetersPerSecondSquared * time.TotalSeconds);
         }
 
         public static Force operator *(Weight weight, Acceleration acceleration)
         {
-            return new Force(weight.Kilogram * acceleration.DistancePerSecondSquared.Meters);
+            return new Force(weight.Kilogram * acceleration.MetersPerSecondSquared);
         }
     }
 }

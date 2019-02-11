@@ -144,16 +144,7 @@ namespace MeasurementsUnitTests
 
             Velocity velocity = distance / duration;
 
-            Assert.AreEqual(TimeSpan.TicksPerSecond * meters / duration.Ticks, velocity.DistancePerSecond.Meters);
-        }
-
-        [TestMethod]
-        public void GetInvalidVelocity()
-        {
-            Distance distance = Distance.MaxValue;
-            TimeSpan duration = TimeSpan.FromSeconds(1);
-
-            Assert.ThrowsException<ArgumentOutOfRangeException>(() => distance / duration);
+            Assert.AreEqual(TimeSpan.TicksPerSecond * meters / duration.Ticks, velocity.MetersPerSecond);
         }
     }
 }

@@ -23,8 +23,7 @@ namespace MeasurementsUnitTests
         [DataRow(Velocity.MaxMetersPerSecond)]
         public void InitializeByDistance(int meters)
         {
-            Distance distance = new Distance(meters);
-            Velocity velocity = new Velocity(distance);
+            Velocity velocity = new Velocity(meters);
             Assert.AreEqual(meters, velocity.MetersPerSecond);
         }
 
@@ -40,20 +39,6 @@ namespace MeasurementsUnitTests
             TimeSpan deltaTime = TimeSpan.FromSeconds(seconds);
             Velocity velocity = new Velocity(distance, deltaTime);
             Assert.AreEqual(meters/ (double)seconds, velocity.MetersPerSecond);
-        }
-
-        [TestMethod]
-        public void TooLargeVelocityByDistance()
-        {
-            Distance distance = new Distance(Velocity.MaxMetersPerSecond + 1);
-            Assert.ThrowsException<ArgumentOutOfRangeException>(() => new Velocity(distance));
-        }
-
-        [TestMethod]
-        public void TooLargeVelocityByMetersPerSecond()
-        {
-            int metersPerSecond = Velocity.MaxMetersPerSecond + 1;
-            Assert.ThrowsException<ArgumentOutOfRangeException>(() => new Velocity(metersPerSecond));
         }
 
         [TestMethod]
@@ -75,7 +60,7 @@ namespace MeasurementsUnitTests
         public void GetDurationTest(long distanceInMillimeters)
         {
             Distance distance = new Distance(distanceInMillimeters);
-            Velocity velocity = new Velocity(new Distance((long)2450));
+            Velocity velocity = new Velocity(2450);
             TimeSpan duration = distance / velocity;
             Assert.AreEqual(Math.Round(1000 * distanceInMillimeters / 2450d, 4), duration.TotalMilliseconds, 0.0002);
         }
@@ -110,15 +95,7 @@ namespace MeasurementsUnitTests
             Velocity velocity1 = new Velocity(3333333);
             Velocity velocity2 = new Velocity(meters);
             Assert.AreEqual(3333333 - meters, (velocity1 - velocity2).MetersPerSecond);
-        }
-
-        [TestMethod]
-        public void InvalidSubtraction()
-        {
-            Velocity velocity1 = new Velocity(10);
-            Velocity velocity2 = new Velocity(20);
-
-            Assert.ThrowsException<ArgumentOutOfRangeException>(() => velocity1 - velocity2);
+            Assert.AreEqual(meters - 3333333, (velocity2 - velocity1).MetersPerSecond);
         }
 
         [DataTestMethod]
@@ -140,7 +117,7 @@ namespace MeasurementsUnitTests
         public void Division(int divisor)
         {
             Velocity velocity1 = new Velocity(10);
-            Assert.AreEqual(10d / divisor, (velocity1 / divisor).DistancePerSecond.Meters);
+            Assert.AreEqual(10d / divisor, (velocity1 / divisor).MetersPerSecond);
         }
     }
 }
