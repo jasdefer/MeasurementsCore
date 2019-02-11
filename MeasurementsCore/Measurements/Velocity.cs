@@ -26,16 +26,17 @@ namespace Measurements
         /// </summary>
         /// <param name="distance">The distance part of the velocity.</param>
         /// <param name="deltaTime">The timespam part of the velocity.</param>
-        public Velocity(Distance distance, TimeSpan deltaTime)
+        public static Velocity FromDistancePerTime(Distance distance, TimeSpan deltaTime)
         {
             //Ensure that the distances calculation does not exceed the long.MaxValue limit
             if (distance.Meters > long.MaxValue / TimeSpan.TicksPerSecond)
             {
-                throw new ArgumentOutOfRangeException(nameof(distance),"The distance is to large. Consider decreasing the distance as well as the delta time.");
+                throw new ArgumentOutOfRangeException(nameof(distance), "The distance is to large. Consider decreasing the distance as well as the delta time.");
             }
 
-            MetersPerSecond = TimeSpan.TicksPerSecond*distance.Meters / deltaTime.Ticks;
-            if (this > SpeedOfLight) throw new ArgumentOutOfRangeException(nameof(distance));
+            double metersPerSecond = TimeSpan.TicksPerSecond * distance.Meters / deltaTime.Ticks;
+            if (metersPerSecond > SpeedOfLight.MetersPerSecond) throw new ArgumentOutOfRangeException(nameof(distance));
+            return new Velocity(metersPerSecond);
         }
 
         /// <summary>
