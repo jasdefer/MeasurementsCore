@@ -13,7 +13,7 @@ namespace MeasurementsUnitTests
         public void Constructor(double meters)
         {
             var acceleration = new Acceleration(new Distance(meters));
-            Assert.AreEqual(meters, acceleration.DistancePerSecondSquared.Meters);
+            Assert.AreEqual(meters, acceleration.MetersPerSecondSquared);
         }
 
         [DataTestMethod]
@@ -22,7 +22,7 @@ namespace MeasurementsUnitTests
         public void FromMillimetersPerSecondsSquared(double millimeters)
         {
             var acceleration = Acceleration.FromMillimetersPerSecondSquared(millimeters);
-            Assert.AreEqual(millimeters, acceleration.DistancePerSecondSquared.Millimeters);
+            Assert.AreEqual(millimeters, acceleration.MetersPerSecondSquared*1000);
         }
 
         [TestMethod]
@@ -46,7 +46,7 @@ namespace MeasurementsUnitTests
         {
             var a1 = Acceleration.FromMetersPerSecondSquared(1);
             var a2 = Acceleration.FromMetersPerSecondSquared(2);
-            Assert.AreEqual(3, (a1+a2).DistancePerSecondSquared.Meters);
+            Assert.AreEqual(3, (a1+a2).MetersPerSecondSquared);
         }
 
         [TestMethod]
@@ -54,7 +54,7 @@ namespace MeasurementsUnitTests
         {
             var a1 = Acceleration.FromMetersPerSecondSquared(1);
             var a2 = Acceleration.FromMetersPerSecondSquared(2);
-            Assert.AreEqual(1, (a2 - a1).DistancePerSecondSquared.Meters);
+            Assert.AreEqual(1, (a2 - a1).MetersPerSecondSquared);
         }
 
         [TestMethod]
@@ -62,7 +62,7 @@ namespace MeasurementsUnitTests
         {
             double multiplicator = 3;
             var a = Acceleration.FromMetersPerSecondSquared(2);
-            Assert.AreEqual(6, (a * multiplicator).DistancePerSecondSquared.Meters);
+            Assert.AreEqual(6, (a * multiplicator).MetersPerSecondSquared);
         }
 
         [TestMethod]
@@ -70,7 +70,7 @@ namespace MeasurementsUnitTests
         {
             double divisor = 2;
             var a = Acceleration.FromMetersPerSecondSquared(5);
-            Assert.AreEqual(2.5, (a / divisor).DistancePerSecondSquared.Meters);
+            Assert.AreEqual(2.5, (a / divisor).MetersPerSecondSquared);
         }
 
         [TestMethod]

@@ -132,8 +132,7 @@ namespace Measurements
 
         public static Velocity operator /(Distance distance, TimeSpan timeSpan)
         {
-            Distance distancePerSecond = new Distance(TimeSpan.TicksPerSecond * distance.Meters / timeSpan.Ticks);
-            return new Velocity(distancePerSecond);
+            return new Velocity(TimeSpan.TicksPerSecond * distance.Meters / timeSpan.Ticks);
         }
     }
 }

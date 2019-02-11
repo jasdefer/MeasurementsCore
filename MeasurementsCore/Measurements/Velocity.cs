@@ -10,22 +10,16 @@ namespace Measurements
         /// <summary>
         /// Distance per second
         /// </summary>
-        public Distance DistancePerSecond { get; }
-
-        /// <summary>
-        /// Initializes a new instance of the velocity structure to the specified distance per second.
-        /// </summary>
-        public Velocity(Distance distance)
-        {
-            if (distance.Meters > MaxMetersPerSecond) throw new ArgumentOutOfRangeException(nameof(distance));
-            DistancePerSecond = distance;
-        }
+        public double MetersPerSecond { get; }
 
         /// <summary>
         /// Initializes a new instance of the velocity structure to the specified distance in meters per second.
         /// </summary>
         /// <param name="metersPerSecond">The distance in meters per second.</param>
-        public Velocity(int metersPerSecond) : this(new Distance(metersPerSecond)) { }
+        public Velocity(double metersPerSecond)
+        {
+            MetersPerSecond = metersPerSecond;
+        }
 
         /// <summary>
         /// Initializes a new instance of the velocity structure to the specified distance in the specified time.
@@ -40,14 +34,9 @@ namespace Measurements
                 throw new ArgumentOutOfRangeException(nameof(distance),"The distance is to large. Consider decreasing the distance as well as the delta time.");
             }
 
-            DistancePerSecond = new Distance(TimeSpan.TicksPerSecond*distance.Meters / deltaTime.Ticks );
+            MetersPerSecond = TimeSpan.TicksPerSecond*distance.Meters / deltaTime.Ticks;
             if (this > SpeedOfLight) throw new ArgumentOutOfRangeException(nameof(distance));
         }
-
-        /// <summary>
-        /// Get the velocity in meters per second.
-        /// </summary>
-        public double MetersPerSecond => DistancePerSecond.Meters;
 
         /// <summary>
         /// Get the timespan needed to cover the specified distance with this velocity.
@@ -55,14 +44,14 @@ namespace Measurements
         public TimeSpan GetDuration(Distance distance)
         {
             if (distance.Meters == 0) return new TimeSpan();
-            else if (DistancePerSecond.Meters == 0) throw new Exception("A velocity of 0 m/s cannot cover any distances greater than 0.");
+            else if (MetersPerSecond == 0) throw new Exception("A velocity of 0 m/s cannot cover any distances greater than 0.");
 
             //Ensure that the duration calculation does not exceed the long.MaxValue limit
             if (distance.Meters > long.MaxValue / TimeSpan.TicksPerSecond)
             {
                 throw new ArgumentOutOfRangeException(nameof(distance));
             }
-            var ticks = TimeSpan.TicksPerSecond * distance.Meters / DistancePerSecond.Meters;
+            var ticks = TimeSpan.TicksPerSecond * distance.Meters / MetersPerSecond;
             return TimeSpan.FromTicks((long)Math.Round(ticks, 0,MidpointRounding.AwayFromZero));
         }
 
@@ -81,48 +70,48 @@ namespace Measurements
             {
                 throw new ArgumentOutOfRangeException(nameof(distance));
             }
-            var ticks = TimeSpan.TicksPerSecond * distance.Meters / velocity.DistancePerSecond.Meters;
+            var ticks = TimeSpan.TicksPerSecond * distance.Meters / velocity.MetersPerSecond;
             return TimeSpan.FromTicks((long)Math.Round(ticks, 0, MidpointRounding.AwayFromZero));
         }
 
         public static bool operator <(Velocity v1, Velocity v2)
         {
-            return v1.DistancePerSecond.Meters < v2.DistancePerSecond.Meters;
+            return v1.MetersPerSecond < v2.MetersPerSecond;
         }
 
         public static bool operator <=(Velocity v1, Velocity v2)
         {
-            return v1.DistancePerSecond.Meters <= v2.DistancePerSecond.Meters;
+            return v1.MetersPerSecond <= v2.MetersPerSecond;
         }
 
         public static bool operator >(Velocity v1, Velocity v2)
         {
-            return v1.DistancePerSecond.Meters > v2.DistancePerSecond.Meters;
+            return v1.MetersPerSecond > v2.MetersPerSecond;
         }
 
         public static bool operator >=(Velocity v1, Velocity v2)
         {
-            return v1.DistancePerSecond.Meters >= v2.DistancePerSecond.Meters;
+            return v1.MetersPerSecond >= v2.MetersPerSecond;
         }
 
         public static bool operator ==(Velocity v1, Velocity v2)
         {
-            return v1.DistancePerSecond.Meters == v2.DistancePerSecond.Meters;
+            return v1.MetersPerSecond == v2.MetersPerSecond;
         }
 
         public static bool operator !=(Velocity v1, Velocity v2)
         {
-            return v1.DistancePerSecond.Meters != v2.DistancePerSecond.Meters;
+            return v1.MetersPerSecond != v2.MetersPerSecond;
         }
 
         public static Velocity operator +(Velocity v1, Velocity v2)
         {
-            return new Velocity(v1.DistancePerSecond + v2.DistancePerSecond);
+            return new Velocity(v1.MetersPerSecond + v2.MetersPerSecond);
         }
         
         public static Velocity operator *(Velocity velocity, int multiplier)
         {
-            return new Velocity(velocity.DistancePerSecond * multiplier);
+            return new Velocity(velocity.MetersPerSecond * multiplier);
         }
 
         public static Velocity operator *(int multiplier, Velocity velocity)
@@ -132,28 +121,28 @@ namespace Measurements
 
         public static Velocity operator -(Velocity v1, Velocity v2)
         {
-            return new Velocity(v1.DistancePerSecond - v2.DistancePerSecond);
+            return new Velocity(v1.MetersPerSecond - v2.MetersPerSecond);
         }
 
         public static Velocity operator /(Velocity velocity, int factor)
         {
-            return new Velocity(velocity.DistancePerSecond / factor);
+            return new Velocity(velocity.MetersPerSecond / factor);
         }
 
         public override bool Equals(object obj)
         {
             if (!(obj is Velocity)) return false;
-            return DistancePerSecond.Meters == ((Distance)obj).Meters;
+            return MetersPerSecond == ((Distance)obj).Meters;
         }
 
         public override int GetHashCode()
         {
-            return DistancePerSecond.GetHashCode();
+            return MetersPerSecond.GetHashCode();
         }
 
         public override string ToString()
         {
-            return $"{DistancePerSecond.Meters}m/s";
+            return $"{MetersPerSecond}m/s";
         }
     }
 }
