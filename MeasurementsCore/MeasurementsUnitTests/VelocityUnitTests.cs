@@ -37,7 +37,7 @@ namespace MeasurementsUnitTests
             int seconds = 2;
             Distance distance = new Distance(meters);
             TimeSpan deltaTime = TimeSpan.FromSeconds(seconds);
-            Velocity velocity = new Velocity(distance, deltaTime);
+            Velocity velocity = Velocity.FromDistancePerTime(distance, deltaTime);
             Assert.AreEqual(meters/ (double)seconds, velocity.MetersPerSecond);
         }
 
@@ -46,7 +46,7 @@ namespace MeasurementsUnitTests
         {
             Distance distance = new Distance((long)Velocity.MaxMetersPerSecond * Distance.MILLIMETERS_PER_METER + 1);
             TimeSpan deltaTime = TimeSpan.FromSeconds(1);
-            Assert.ThrowsException<ArgumentOutOfRangeException>(() => new Velocity(distance, deltaTime));
+            Assert.ThrowsException<ArgumentOutOfRangeException>(() => Velocity.FromDistancePerTime(distance, deltaTime));
         }
 
         [DataTestMethod]
