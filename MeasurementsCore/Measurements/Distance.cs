@@ -39,7 +39,7 @@ namespace Measurements
         /// </summary>
         public static Distance FromMillimeters(double millimeters)
         {
-            return new Distance(millimeters/1000);
+            return new Distance(millimeters/MILLIMETERS_PER_METER);
         }
 
         /// <summary>
