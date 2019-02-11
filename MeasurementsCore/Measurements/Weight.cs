@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 
 namespace Measurements
 {
@@ -37,19 +37,19 @@ namespace Measurements
         /// <returns></returns>
         public static Weight FromKilograms(double kilograms)
         {
-            return new Weight(kilograms * 1000);
+            return new Weight(kilograms * GRAMS_PER_KILOGRAM);
         }
 
         /// Initializes a new instance of the weight structure to the specified weight in metric tons.
         public static Weight FromMetricTons(double metricTons)
         {
-            return new Weight(metricTons * 1000000);
+            return new Weight(metricTons * GRAMS_PER_METRIC_TON);
         }
 
         public double Gram { get; }
-        public double Kilogram => Gram / 1000d;
-        public double MetricTon => Gram / 1000000d;
-        public double Milligram => Gram * 1000;
+        public double Kilogram => Gram / GRAMS_PER_KILOGRAM;
+        public double MetricTon => Gram / GRAMS_PER_METRIC_TON;
+        public double Milligram => Gram * MILLIGRAMS_PER_GRAM;
 
         public override string ToString()
         {
