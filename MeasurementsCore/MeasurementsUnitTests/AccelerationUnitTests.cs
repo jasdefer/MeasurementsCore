@@ -12,7 +12,7 @@ namespace MeasurementsUnitTests
         [DataRow(double.MaxValue/10000)]
         public void Constructor(double meters)
         {
-            var acceleration = new Acceleration(new Distance(meters));
+            var acceleration = new Acceleration(meters);
             Assert.AreEqual(meters, acceleration.MetersPerSecondSquared);
         }
 
@@ -28,9 +28,9 @@ namespace MeasurementsUnitTests
         [TestMethod]
         public void Compare()
         {
-            var a1 = Acceleration.FromMetersPerSecondSquared(1);
-            var a2 = Acceleration.FromMetersPerSecondSquared(2);
-            var a3 = Acceleration.FromMetersPerSecondSquared(2);
+            var a1 = new Acceleration(1);
+            var a2 = new Acceleration(2);
+            var a3 = new Acceleration(2);
             Assert.IsTrue(a1 < a2);
             Assert.IsTrue(a2 > a1);
             Assert.IsTrue(a1 <= a2);
@@ -44,16 +44,16 @@ namespace MeasurementsUnitTests
         [TestMethod]
         public void Addition()
         {
-            var a1 = Acceleration.FromMetersPerSecondSquared(1);
-            var a2 = Acceleration.FromMetersPerSecondSquared(2);
+            var a1 = new Acceleration(1);
+            var a2 = new Acceleration(2);
             Assert.AreEqual(3, (a1+a2).MetersPerSecondSquared);
         }
 
         [TestMethod]
         public void Subtraction()
         {
-            var a1 = Acceleration.FromMetersPerSecondSquared(1);
-            var a2 = Acceleration.FromMetersPerSecondSquared(2);
+            var a1 = new Acceleration(1);
+            var a2 = new Acceleration(2);
             Assert.AreEqual(1, (a2 - a1).MetersPerSecondSquared);
         }
 
@@ -61,7 +61,7 @@ namespace MeasurementsUnitTests
         public void Multiplication()
         {
             double multiplicator = 3;
-            var a = Acceleration.FromMetersPerSecondSquared(2);
+            var a = new Acceleration(2);
             Assert.AreEqual(6, (a * multiplicator).MetersPerSecondSquared);
         }
 
@@ -69,14 +69,14 @@ namespace MeasurementsUnitTests
         public void Division()
         {
             double divisor = 2;
-            var a = Acceleration.FromMetersPerSecondSquared(5);
+            var a = new Acceleration(5);
             Assert.AreEqual(2.5, (a / divisor).MetersPerSecondSquared);
         }
 
         [TestMethod]
         public void Velocity()
         {
-            var acceleration = Acceleration.FromMetersPerSecondSquared(2);
+            var acceleration = new Acceleration(2);
             var time = TimeSpan.FromSeconds(5);
             var velocity = acceleration * time;
             Assert.AreEqual(10, velocity.MetersPerSecond);
@@ -85,7 +85,7 @@ namespace MeasurementsUnitTests
         [TestMethod]
         public void Force()
         {
-            var acceleration = new Acceleration(new Distance(3));
+            var acceleration = new Acceleration(3);
             var weight = Weight.FromKilograms(4);
             var force = weight * acceleration;
             Assert.AreEqual(12, force.Newton);

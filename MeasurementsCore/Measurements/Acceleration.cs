@@ -7,14 +7,6 @@ namespace Measurements
         public double MetersPerSecondSquared { get; }
 
         /// <summary>
-        /// Initializes a new instance of the acceleration structure to the specified distance per square seconds.
-        /// </summary>
-        public Acceleration(Distance distancePerSecondSquared)
-        {
-            MetersPerSecondSquared = distancePerSecondSquared.Meters;
-        }
-
-        /// <summary>
         /// Initializes a new instance of the acceleration structure to the specified meters per square seconds.
         /// </summary>
         public Acceleration(double metersPerSecondSquared)
@@ -23,19 +15,11 @@ namespace Measurements
         }
 
         /// <summary>
-        /// Initializes a new instance of the acceleration structure to the specified meters per square seconds.
-        /// </summary>
-        public static Acceleration FromMetersPerSecondSquared(double meters)
-        {
-            return new Acceleration(new Distance(meters));
-        }
-
-        /// <summary>
         /// Initializes a new instance of the acceleration structure to the specified millimeters per square seconds.
         /// </summary>
         public static Acceleration FromMillimetersPerSecondSquared(double millimeters)
         {
-            return new Acceleration(Distance.FromMillimeters(millimeters));
+            return new Acceleration(millimeters/Distance.MILLIMETERS_PER_METER);
         }
 
         public override string ToString()
