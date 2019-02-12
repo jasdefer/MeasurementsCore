@@ -28,59 +28,59 @@
             return nameof(Watt).GetHashCode() ^ Watt.GetHashCode();
         }
 
-        public static bool operator ==(Power f1, Power f2)
+        public static bool operator ==(Power p1, Power p2)
         {
-            return f1.Watt == f2.Watt;
+            return p1.Watt == p2.Watt;
         }
 
-        public static bool operator !=(Power f1, Power f2)
+        public static bool operator !=(Power p1, Power p2)
         {
-            return !(f1 == f2);
+            return !(p1 == p2);
         }
 
-        public static bool operator <(Power f1, Power f2)
+        public static bool operator <(Power p1, Power p2)
         {
-            return f1.Watt < f2.Watt;
+            return p1.Watt < p2.Watt;
         }
 
-        public static bool operator <=(Power f1, Power f2)
+        public static bool operator <=(Power p1, Power p2)
         {
-            return f1.Watt <= f2.Watt;
+            return p1.Watt <= p2.Watt;
         }
 
-        public static bool operator >(Power f1, Power f2)
+        public static bool operator >(Power p1, Power p2)
         {
-            return f1.Watt > f2.Watt;
+            return p1.Watt > p2.Watt;
         }
 
-        public static bool operator >=(Power f1, Power f2)
+        public static bool operator >=(Power p1, Power p2)
         {
-            return f1.Watt >= f2.Watt;
+            return p1.Watt >= p2.Watt;
         }
 
-        public static Power operator +(Power f1, Power f2)
+        public static Power operator +(Power p1, Power p2)
         {
-            return new Power(f1.Watt + f2.Watt);
+            return new Power(p1.Watt + p2.Watt);
         }
 
-        public static Power operator -(Power f1, Power f2)
+        public static Power operator -(Power p1, Power p2)
         {
-            return new Power(f1.Watt - f2.Watt);
+            return new Power(p1.Watt - p2.Watt);
         }
 
-        public static Power operator *(Power f1, double multiplicator)
+        public static Power operator *(Power p1, double multiplicator)
         {
-            return new Power(f1.Watt * multiplicator);
+            return new Power(p1.Watt * multiplicator);
         }
 
-        public static Power operator /(Power f1, double divisor)
+        public static Power operator /(Power p1, double divisor)
         {
-            return new Power(f1.Watt / divisor);
+            return new Power(p1.Watt / divisor);
         }
 
-        public static double operator /(Power f1, Power f2)
+        public static double operator /(Power p1, Power p2)
         {
-            return f1.Watt / f2.Watt;
+            return p1.Watt / p2.Watt;
         }
     }
 }

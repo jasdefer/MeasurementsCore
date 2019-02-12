@@ -44,59 +44,59 @@ namespace Measurements
             return nameof(Joule).GetHashCode() ^ Joule.GetHashCode();
         }
 
-        public static bool operator ==(Work f1, Work f2)
+        public static bool operator ==(Work w1, Work w2)
         {
-            return f1.Joule == f2.Joule;
+            return w1.Joule == w2.Joule;
         }
 
-        public static bool operator !=(Work f1, Work f2)
+        public static bool operator !=(Work w1, Work w2)
         {
-            return !(f1 == f2);
+            return !(w1 == w2);
         }
 
-        public static bool operator <(Work f1, Work f2)
+        public static bool operator <(Work w1, Work w2)
         {
-            return f1.Joule < f2.Joule;
+            return w1.Joule < w2.Joule;
         }
 
-        public static bool operator <=(Work f1, Work f2)
+        public static bool operator <=(Work w1, Work w2)
         {
-            return f1.Joule <= f2.Joule;
+            return w1.Joule <= w2.Joule;
         }
 
-        public static bool operator >(Work f1, Work f2)
+        public static bool operator >(Work w1, Work w2)
         {
-            return f1.Joule > f2.Joule;
+            return w1.Joule > w2.Joule;
         }
 
-        public static bool operator >=(Work f1, Work f2)
+        public static bool operator >=(Work w1, Work w2)
         {
-            return f1.Joule >= f2.Joule;
+            return w1.Joule >= w2.Joule;
         }
 
-        public static Work operator +(Work f1, Work f2)
+        public static Work operator +(Work w1, Work w2)
         {
-            return new Work(f1.Joule + f2.Joule);
+            return new Work(w1.Joule + w2.Joule);
         }
 
-        public static Work operator -(Work f1, Work f2)
+        public static Work operator -(Work w1, Work w2)
         {
-            return new Work(f1.Joule - f2.Joule);
+            return new Work(w1.Joule - w2.Joule);
         }
 
-        public static Work operator *(Work f1, double multiplicator)
+        public static Work operator *(Work w1, double multiplicator)
         {
-            return new Work(f1.Joule * multiplicator);
+            return new Work(w1.Joule * multiplicator);
         }
 
-        public static Work operator /(Work f1, double divisor)
+        public static Work operator /(Work w1, double divisor)
         {
-            return new Work(f1.Joule / divisor);
+            return new Work(w1.Joule / divisor);
         }
 
-        public static double operator /(Work f1, Work f2)
+        public static double operator /(Work w1, Work w2)
         {
-            return f1.Joule / f2.Joule;
+            return w1.Joule / w2.Joule;
         }
 
         public static Power operator /(Work work, TimeSpan time)
