@@ -93,6 +93,11 @@ namespace Measurements
             return new Velocity(acceleration.MetersPerSecondSquared * time.TotalSeconds);
         }
 
+        public static TimeSpan operator /(Velocity velocity, Acceleration acceleration)
+        {
+            return TimeSpan.FromSeconds(velocity.MetersPerSecond / acceleration.MetersPerSecondSquared);
+        }
+
         public static Force operator *(Weight weight, Acceleration acceleration)
         {
             return new Force(weight.Kilogram * acceleration.MetersPerSecondSquared);
