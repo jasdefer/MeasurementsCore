@@ -130,6 +130,16 @@ namespace Measurements
             return new Velocity(velocity.MetersPerSecond / factor);
         }
 
+        public static Acceleration operator /(Velocity v, TimeSpan t)
+        {
+            return new Acceleration(v.MetersPerSecond / t.TotalSeconds);
+        }
+
+        public static Distance operator *(Velocity v, TimeSpan t)
+        {
+            return new Distance(v.MetersPerSecond * t.TotalSeconds);
+        }
+
         public override bool Equals(object obj)
         {
             if (!(obj is Velocity)) return false;
