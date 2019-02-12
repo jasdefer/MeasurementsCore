@@ -90,5 +90,14 @@ namespace MeasurementsUnitTests
             var force = weight * acceleration;
             Assert.AreEqual(12, force.Newton);
         }
+
+        [TestMethod]
+        public void VelocityDividedByAccelerationPos()
+        {
+            var velocity = new Velocity(1);
+            var acceleration = new Acceleration(2);
+            var timespan = velocity / acceleration;
+            Assert.AreEqual(0.5, timespan.TotalSeconds);
+        }
     }
 }
