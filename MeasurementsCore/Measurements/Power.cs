@@ -68,14 +68,19 @@
             return new Power(p1.Watt - p2.Watt);
         }
 
-        public static Power operator *(Power p1, double multiplicator)
+        public static Power operator *(Power p, double multiplicator)
         {
-            return new Power(p1.Watt * multiplicator);
+            return new Power(p.Watt * multiplicator);
         }
 
-        public static Power operator /(Power p1, double divisor)
+        public static Power operator *(double multiplicator, Power p)
         {
-            return new Power(p1.Watt / divisor);
+            return p * multiplicator;
+        }
+
+        public static Power operator /(Power p, double divisor)
+        {
+            return new Power(p.Watt / divisor);
         }
 
         public static double operator /(Power p1, Power p2)

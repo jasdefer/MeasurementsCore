@@ -89,9 +89,14 @@ namespace Measurements
             return new Work(w1.Joule * multiplicator);
         }
 
-        public static Work operator /(Work w1, double divisor)
+        public static Work operator *(double multiplicator, Work w)
         {
-            return new Work(w1.Joule / divisor);
+            return w * multiplicator;
+        }
+
+        public static Work operator /(Work w, double divisor)
+        {
+            return new Work(w.Joule / divisor);
         }
 
         public static double operator /(Work w1, Work w2)

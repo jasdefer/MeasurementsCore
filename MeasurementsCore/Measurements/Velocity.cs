@@ -115,6 +115,16 @@ namespace Measurements
             return new Velocity(velocity.MetersPerSecond * multiplier);
         }
 
+        public static Velocity operator *(Velocity velocity, double multiplier)
+        {
+            return new Velocity(velocity.MetersPerSecond * multiplier);
+        }
+
+        public static Velocity operator *(double multiplier, Velocity velocity)
+        {
+            return velocity*multiplier;
+        }
+
         public static Velocity operator *(int multiplier, Velocity velocity)
         {
             return velocity * multiplier;
@@ -138,6 +148,11 @@ namespace Measurements
         public static Distance operator *(Velocity v, TimeSpan t)
         {
             return new Distance(v.MetersPerSecond * t.TotalSeconds);
+        }
+
+        public static Distance operator *(TimeSpan t, Velocity v)
+        {
+            return v * t;
         }
 
         public override bool Equals(object obj)
