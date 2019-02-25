@@ -68,14 +68,19 @@
             return new Force(f1.Newton - f2.Newton);
         }
 
-        public static Force operator *(Force f1, double multiplicator)
+        public static Force operator *(Force f, double multiplicator)
         {
-            return new Force(f1.Newton * multiplicator);
+            return new Force(f.Newton * multiplicator);
         }
 
-        public static Force operator /(Force f1, double divisor)
+        public static Force operator *(double multiplicator, Force f)
         {
-            return new Force(f1.Newton / divisor);
+            return f * multiplicator;
+        }
+
+        public static Force operator /(Force f, double divisor)
+        {
+            return new Force(f.Newton / divisor);
         }
 
         public static double operator /(Force f1, Force f2)

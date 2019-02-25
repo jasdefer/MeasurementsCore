@@ -78,9 +78,14 @@ namespace Measurements
             return new Acceleration(a1.MetersPerSecondSquared - a2.MetersPerSecondSquared);
         }
 
-        public static Acceleration operator *(Acceleration a1, double multiplicator)
+        public static Acceleration operator *(Acceleration a, double multiplicator)
         {
-            return new Acceleration(a1.MetersPerSecondSquared * multiplicator);
+            return new Acceleration(a.MetersPerSecondSquared * multiplicator);
+        }
+
+        public static Acceleration operator *(double multiplicator, Acceleration a)
+        {
+            return a * multiplicator;
         }
 
         public static Acceleration operator /(Acceleration a1, double divisor)
@@ -93,6 +98,11 @@ namespace Measurements
             return new Velocity(acceleration.MetersPerSecondSquared * time.TotalSeconds);
         }
 
+        public static Velocity operator *(TimeSpan time, Acceleration acceleration)
+        {
+            return acceleration * time;
+        }
+
         public static TimeSpan operator /(Velocity velocity, Acceleration acceleration)
         {
             return TimeSpan.FromSeconds(velocity.MetersPerSecond / acceleration.MetersPerSecondSquared);
@@ -101,6 +111,11 @@ namespace Measurements
         public static Force operator *(Weight weight, Acceleration acceleration)
         {
             return new Force(weight.Kilogram * acceleration.MetersPerSecondSquared);
+        }
+
+        public static Force operator *(Acceleration acceleration, Weight weight)
+        {
+            return weight * acceleration;
         }
     }
 }

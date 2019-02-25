@@ -118,14 +118,29 @@ namespace Measurements
             return new Weight(w1.Gram - w2.Gram);
         }
 
-        public static Weight operator *(Weight w1, int multiplier)
+        public static Weight operator *(Weight w, int multiplier)
         {
-            return new Weight(w1.Gram * multiplier);
+            return new Weight(w.Gram * multiplier);
         }
 
-        public static Weight operator /(Weight w1, int divisor)
+        public static Weight operator *(int multiplier, Weight w)
         {
-            return new Weight(w1.Gram / divisor);
+            return w * multiplier;
+        }
+
+        public static Weight operator *(Weight w, double multiplier)
+        {
+            return new Weight(w.Gram * multiplier);
+        }
+
+        public static Weight operator *(double multiplier, Weight w)
+        {
+            return w * multiplier;
+        }
+
+        public static Weight operator /(Weight w, int divisor)
+        {
+            return new Weight(w.Gram / divisor);
         }
 
         public static double operator /(Weight w1, Weight w2)

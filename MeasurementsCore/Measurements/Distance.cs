@@ -107,6 +107,11 @@ namespace Measurements
             return new Distance(distance.Meters * multiplier);
         }
 
+        public static Distance operator *(double multiplier, Distance distance)
+        {
+            return distance * multiplier;
+        }
+
         public static Distance operator *(Distance distance, int multiplier)
         {
             if (multiplier < 0) throw new ArgumentOutOfRangeException(nameof(multiplier));
@@ -115,8 +120,7 @@ namespace Measurements
 
         public static Distance operator *(int multiplier, Distance distance)
         {
-            if (multiplier < 0) throw new ArgumentOutOfRangeException(nameof(multiplier));
-            return new Distance(distance.Meters * multiplier);
+            return distance * multiplier;
         }
 
         public static Distance operator -(Distance distanceOne, Distance distanceTwo)
