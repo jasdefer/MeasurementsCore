@@ -50,6 +50,19 @@ namespace Measurements
             return new Distance(kilometers * 1000);
         }
 
+        /// <summary>
+        /// Calculate the distance travelled with an uniform acceleration for a given time: s = s0+v0*t+0.5*a*t²
+        /// </summary>
+        /// <param name="t">The time of the uniform acceleration</param>
+        /// <param name="a">The uniform acceleration</param>
+        /// <param name="v0">The initial velocity, defaults to 0</param>
+        /// <param name="s0">The initial distance, defaults to 0</param>
+        /// <returns>Returns the travelled distance after accelerating for a given time.</returns>
+        public static Distance FromUniformAcceleration(TimeSpan t, Acceleration a, Velocity v0 = new Velocity(), Distance s0 = new Distance())
+        {
+            return s0 + v0 * t + 0.5 * a * t * t;
+        }
+
         public override string ToString()
         {
             return $"{Meters}m";
