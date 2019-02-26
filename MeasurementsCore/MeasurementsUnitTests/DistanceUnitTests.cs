@@ -9,7 +9,7 @@ namespace MeasurementsUnitTests
     {
         [DataTestMethod]
         [DataRow(-1)]
-        [DataRow(double.MaxValue/1000)]
+        [DataRow(double.MaxValue / 1000)]
         public void InvalidDistances(double meters)
         {
             Assert.ThrowsException<ArgumentOutOfRangeException>(() => new Distance(meters));
@@ -25,7 +25,7 @@ namespace MeasurementsUnitTests
         [DataTestMethod]
         [DataRow(0)]
         [DataRow(1.5)]
-        [DataRow(double.MaxValue/10000)]
+        [DataRow(double.MaxValue / 10000)]
         public void ConstructorFromMeter(double meters)
         {
             Distance distanceFromMeters = new Distance(meters);
@@ -45,7 +45,7 @@ namespace MeasurementsUnitTests
         [DataTestMethod]
         [DataRow(0)]
         [DataRow(1.5)]
-        [DataRow(double.MaxValue/10000000)]
+        [DataRow(double.MaxValue / 10000000)]
         public void ConstructorFromKilometers(double kilometers)
         {
             Distance distanceFromKiloMeters = Distance.FromKilometers(kilometers);
@@ -131,7 +131,7 @@ namespace MeasurementsUnitTests
         {
             Distance distance = new Distance(10);
             Distance result = distance / divisor;
-            Assert.AreEqual(distance.Meters/divisor, result.Meters);
+            Assert.AreEqual(distance.Meters / divisor, result.Meters);
         }
 
         [DataTestMethod]
@@ -145,6 +145,17 @@ namespace MeasurementsUnitTests
             Velocity velocity = distance / duration;
 
             Assert.AreEqual(TimeSpan.TicksPerSecond * meters / duration.Ticks, velocity.MetersPerSecond);
+        }
+
+        [TestMethod]
+        public void FromUniformAcceleration()
+        {
+            var t = TimeSpan.FromSeconds(12);
+            var a = new Acceleration(1);
+            var v = new Velocity(5);
+            var s = new Distance(7);
+            Distance distance = Distance.FromUniformAcceleration(t, a, v, s);
+            Assert.AreEqual(new Distance(139), distance);
         }
     }
 }
