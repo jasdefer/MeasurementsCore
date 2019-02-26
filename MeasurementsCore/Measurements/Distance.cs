@@ -63,6 +63,26 @@ namespace Measurements
             return s0 + v0 * t + 0.5 * a * t * t;
         }
 
+        /// <summary>
+        /// Calculate the time needed to move this distance during a uniform acceleration. Solve for t: s(t) = s0 + v0 * t + 0.5 * a * t²
+        /// </summary>
+        /// <param name="a">The uniform acceleration.</param>
+        /// <param name="s0">The distance already moved.</param>
+        /// <param name="v0">The start velocity.</param>
+        /// <returns>Always returns the positive time.</returns>
+        public TimeSpan GetTimeForUniformAcceleration(Acceleration a, Distance s0 = new Distance(), Velocity v0 = new Velocity())
+        {
+            if (s0 > this) throw new Exception($"This distance {Meters}m have aready been reached.");
+            if(a.MetersPerSecondSquared == 0)
+            {
+                return (this - s0) / v0;
+            }
+            double seconds = Math.Sqrt(2 * a.MetersPerSecondSquared * (Meters - s0.Meters) + v0.MetersPerSecond * v0.MetersPerSecond);
+            seconds -= v0.MetersPerSecond;
+            seconds /= a.MetersPerSecondSquared;
+            return TimeSpan.FromTicks((long)(seconds*TimeSpan.TicksPerSecond));
+        }
+
         public override string ToString()
         {
             return $"{Meters}m";

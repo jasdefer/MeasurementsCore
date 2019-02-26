@@ -157,5 +157,13 @@ namespace MeasurementsUnitTests
             Distance distance = Distance.FromUniformAcceleration(t, a, v, s);
             Assert.AreEqual(new Distance(139), distance);
         }
+
+        [TestMethod]
+        public void GetTimeForUniformAcceleration()
+        {
+            var s = new Distance(100);
+            var t = s.GetTimeForUniformAcceleration(new Acceleration(1), new Distance(20), new Velocity(5));
+            Assert.AreEqual(8.60147, t.TotalSeconds, 0.00001);
+        }
     }
 }
