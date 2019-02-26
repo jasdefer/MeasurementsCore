@@ -40,6 +40,17 @@ namespace Measurements
         }
 
         /// <summary>
+        /// Initializes a new instance of the velocity structure when accelerating uniformly for a given amount of time.
+        /// </summary>
+        /// <param name="deltaTime">The duration of uniform acceleration.</param>
+        /// <param name="acceleration">The uniform acceleration.</param>
+        /// <param name="startVelocity">The start velocity.</param>
+        public static Velocity FromUniformAcceleration(TimeSpan deltaTime, Acceleration acceleration, Velocity startVelocity = new Velocity())
+        {
+            return startVelocity + deltaTime * acceleration;
+        }
+
+        /// <summary>
         /// Get the timespan needed to cover the specified distance with this velocity.
         /// </summary>
         public TimeSpan GetDuration(Distance distance)
