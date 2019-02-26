@@ -8,7 +8,6 @@ namespace MeasurementsUnitTests
     public class DistanceUnitTests
     {
         [DataTestMethod]
-        [DataRow(-1)]
         [DataRow(double.MaxValue / 1000)]
         public void InvalidDistances(double meters)
         {
@@ -114,14 +113,6 @@ namespace MeasurementsUnitTests
             Distance distance = new Distance(1000);
             Distance result = distance - new Distance(meters);
             Assert.AreEqual(result.Meters, distance.Meters - meters);
-        }
-
-        [TestMethod]
-        public void InvalidSubtraction()
-        {
-            Distance distance1 = new Distance(10);
-            Distance distance2 = new Distance(20);
-            Assert.ThrowsException<ArgumentOutOfRangeException>(() => distance1 - distance2);
         }
 
         [DataTestMethod]
