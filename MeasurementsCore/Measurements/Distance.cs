@@ -8,7 +8,7 @@ namespace Measurements
         /// Ensures, that the meter representation in int is still valid
         /// </summary>
         private const double MAX_METERS = double.MaxValue / 10000;
-        private const double MIN_METERS = 0;
+        private const double MIN_METERS = -double.MaxValue / 10000;
 
         public static Distance MinValue = new Distance(MIN_METERS);
         public static Distance MaxValue = new Distance(MAX_METERS);
