@@ -105,7 +105,7 @@ namespace Measurements
 
         public static TimeSpan operator /(Velocity velocity, Acceleration acceleration)
         {
-            return TimeSpan.FromSeconds(velocity.MetersPerSecond / acceleration.MetersPerSecondSquared);
+            return TimeSpan.FromTicks((long)Math.Round(TimeSpan.TicksPerSecond * velocity.MetersPerSecond / acceleration.MetersPerSecondSquared));
         }
 
         public static Force operator *(Weight weight, Acceleration acceleration)

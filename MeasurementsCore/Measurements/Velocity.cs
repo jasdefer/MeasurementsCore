@@ -64,7 +64,7 @@ namespace Measurements
                 throw new ArgumentOutOfRangeException(nameof(distance));
             }
             var ticks = TimeSpan.TicksPerSecond * distance.Meters / MetersPerSecond;
-            return TimeSpan.FromTicks((long)Math.Round(ticks, 0,MidpointRounding.AwayFromZero));
+            return TimeSpan.FromTicks((long)Math.Round(ticks, 0));
         }
 
         /// <summary>
@@ -83,7 +83,7 @@ namespace Measurements
                 throw new ArgumentOutOfRangeException(nameof(distance));
             }
             var ticks = TimeSpan.TicksPerSecond * distance.Meters / velocity.MetersPerSecond;
-            return TimeSpan.FromTicks((long)Math.Round(ticks, 0, MidpointRounding.AwayFromZero));
+            return TimeSpan.FromTicks((long)Math.Round(ticks, 0));
         }
 
         public static bool operator <(Velocity v1, Velocity v2)
