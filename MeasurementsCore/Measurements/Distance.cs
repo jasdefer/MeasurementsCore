@@ -84,7 +84,7 @@ namespace Measurements
             var t2 = (-sqrt - v0.MetersPerSecond)/a.MetersPerSecondSquared;
             //Return the positive time, when the distance is reached. If there are 
             var seconds = (t1>=0&&t2>=0&&t1<t2)||(t1>=0&&t2<0)? t1 : t2;
-            return TimeSpan.FromTicks((long)(seconds*TimeSpan.TicksPerSecond));
+            return TimeSpan.FromTicks((long)Math.Round(seconds*TimeSpan.TicksPerSecond));
         }
 
         public override string ToString()
