@@ -77,9 +77,13 @@ namespace Measurements
             {
                 return (this - s0) / v0;
             }
-            double seconds = Math.Sqrt(2 * a.MetersPerSecondSquared * (Meters - s0.Meters) + v0.MetersPerSecond * v0.MetersPerSecond);
-            seconds -= v0.MetersPerSecond;
-            seconds /= a.MetersPerSecondSquared;
+            double sqrt = 2 * a.MetersPerSecondSquared * (Meters - s0.Meters) + v0.MetersPerSecond * v0.MetersPerSecond;
+            if (sqrt < 0) throw new Exception($"This distance is never reached");
+            sqrt = Math.Sqrt(sqrt);
+            var t1 = (sqrt-v0.MetersPerSecond)/a.MetersPerSecondSquared;
+            var t2 = (-sqrt - v0.MetersPerSecond)/a.MetersPerSecondSquared;
+            //Return the positive time, when the distance is reached. If there are 
+            var seconds = t1 >= 0 && t1 < t2 ? t1 : t2;
             return TimeSpan.FromTicks((long)(seconds*TimeSpan.TicksPerSecond));
         }
 

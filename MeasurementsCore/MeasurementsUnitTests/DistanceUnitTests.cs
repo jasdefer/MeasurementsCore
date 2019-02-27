@@ -156,5 +156,13 @@ namespace MeasurementsUnitTests
             var t = s.GetTimeForUniformAcceleration(new Acceleration(1), new Distance(20), new Velocity(5));
             Assert.AreEqual(8.60147, t.TotalSeconds, 0.00001);
         }
+
+        [TestMethod]
+        public void GetTimeForUniformNegativeAcceleration()
+        {
+            var s = new Distance(5);
+            var t = s.GetTimeForUniformAcceleration(new Acceleration(-1), new Distance(0), new Velocity(5));
+            Assert.AreEqual(1.12702, t.TotalSeconds, 0.00001);
+        }
     }
 }
