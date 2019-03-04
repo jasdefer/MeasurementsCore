@@ -2,7 +2,14 @@
 {
     public struct Power
     {
+        public const int WATT_PER_KILOWATT = 1000;
+        public const int WATT_PER_MEGAWATT = 1000000;
+        public const int WATT_PER_GIGAWATT = 1000000000;
+
         public double Watt { get; }
+        public double KiloWatt => Watt / WATT_PER_KILOWATT;
+        public double GigaWatt => Watt / WATT_PER_GIGAWATT;
+        public double MegaWatt => Watt / WATT_PER_MEGAWATT;
 
         /// <summary>
         /// Initializes a new instance of the power structure to the specified power in watt.

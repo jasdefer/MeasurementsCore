@@ -69,5 +69,26 @@ namespace MeasurementsUnitTests
             var result = p1 / p2;
             Assert.AreEqual(5, result);
         }
+
+        [TestMethod]
+        public void KiloWatt()
+        {
+            var power = new Power(1000);
+            Assert.AreEqual(1, power.KiloWatt);
+        }
+
+        [TestMethod]
+        public void MegeWatt()
+        {
+            var power = new Power(1000000);
+            Assert.AreEqual(1, power.MegaWatt);
+        }
+
+        [TestMethod]
+        public void GigaWatt()
+        {
+            var power = new Power(1000000000);
+            Assert.AreEqual(1, power.GigaWatt);
+        }
     }
 }
