@@ -9,10 +9,11 @@
     <PackageTags>Measurements Measurement Distance Velocity Weight Force Power Work Angle</PackageTags>
     <Description>A library containing representations for measurements like distance or velocity.</Description>
     <PackageLicenseUrl>http://www.apache.org/licenses/LICENSE-2.0</PackageLicenseUrl>
-    <Version>1.3.2</Version>
+    <Version>1.3.3</Version>
     <PackageId>MeasurementsCore</PackageId>
     <Product>MeasurementsCore</Product>
-    <PackageReleaseNotes>Improved the time span accuracy when dividing the velocity by the acceleration.</PackageReleaseNotes>
+    <PackageReleaseNotes>Added min and max values.
+Added more watt values.</PackageReleaseNotes>
   </PropertyGroup>
 
 </Project>
