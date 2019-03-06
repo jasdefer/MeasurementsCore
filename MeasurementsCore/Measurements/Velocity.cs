@@ -7,7 +7,7 @@ namespace Measurements
         public const int MaxMetersPerSecond = 299792458;
         public static readonly Velocity SpeedOfLight = new Velocity(MaxMetersPerSecond);
         public static readonly Velocity MaxValue = SpeedOfLight;
-        public static readonly Velocity MinValues = new Velocity(-MaxMetersPerSecond);
+        public static readonly Velocity MinValue = new Velocity(-MaxMetersPerSecond);
 
         /// <summary>
         /// Distance per second

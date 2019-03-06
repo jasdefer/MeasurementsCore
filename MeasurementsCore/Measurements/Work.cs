@@ -12,6 +12,9 @@ namespace Measurements
 
         public double MegawattHour => Joule / 3600000000;
 
+        public static readonly Work MinValue = new Work(double.MinValue);
+        public static readonly Work MaxValue = new Work(double.MaxValue);
+
         /// <summary>
         /// Initializes a new instance of the work structure to the specified work in joule.
         /// </summary>

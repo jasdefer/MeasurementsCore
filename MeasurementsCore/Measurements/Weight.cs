@@ -14,8 +14,8 @@ namespace Measurements
         public const int GRAMS_PER_KILOGRAM = 1000;
         public const int GRAMS_PER_METRIC_TON = 1000000;
 
-        public static readonly Weight MAX = new Weight(MAX_GRAM);
-        public static readonly Weight MIN = new Weight(MIN_GRAM);
+        public static readonly Weight MaxValue = new Weight(MAX_GRAM);
+        public static readonly Weight MinValue = new Weight(MIN_GRAM);
 
         /// <summary>
         /// Initializes a new instance of the weight structure to the specified weight in grams.

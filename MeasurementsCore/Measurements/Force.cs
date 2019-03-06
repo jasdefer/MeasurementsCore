@@ -4,6 +4,9 @@
     {
         public double Newton { get; }
 
+        public static readonly Force MinValue = new Force(double.MinValue);
+        public static readonly Force MaxValue = new Force(double.MaxValue);
+
         /// <summary>
         /// Initializes a new instance of the force structure to the specified force in newtons.
         /// </summary>

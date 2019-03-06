@@ -6,6 +6,9 @@ namespace Measurements
     {
         public double MetersPerSecondSquared { get; }
 
+        public static readonly Acceleration MinValue = new Acceleration(double.MinValue);
+        public static readonly Acceleration MaxValue = new Acceleration(double.MaxValue);
+
         /// <summary>
         /// Initializes a new instance of the acceleration structure to the specified meters per square seconds.
         /// </summary>

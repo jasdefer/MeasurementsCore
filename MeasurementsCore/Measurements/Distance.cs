@@ -10,8 +10,8 @@ namespace Measurements
         private const double MAX_METERS = double.MaxValue / 10000;
         private const double MIN_METERS = -double.MaxValue / 10000;
 
-        public static Distance MinValue = new Distance(MIN_METERS);
-        public static Distance MaxValue = new Distance(MAX_METERS);
+        public static readonly Distance MinValue = new Distance(MIN_METERS);
+        public static readonly Distance MaxValue = new Distance(MAX_METERS);
 
         public const int MILLIMETERS_PER_METER = 1000;
         public const int CENTIMETERS_PER_METER = 100;
