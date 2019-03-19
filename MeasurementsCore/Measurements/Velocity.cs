@@ -171,7 +171,7 @@ namespace Measurements
         public override bool Equals(object obj)
         {
             if (!(obj is Velocity)) return false;
-            return MetersPerSecond == ((Distance)obj).Meters;
+            return MetersPerSecond == ((Velocity)obj).MetersPerSecond;
         }
 
         public override int GetHashCode()
