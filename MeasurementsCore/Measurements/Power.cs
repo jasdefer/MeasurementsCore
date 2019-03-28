@@ -35,6 +35,16 @@ namespace Measurements
             return this == (Power)obj;
         }
 
+        /// <summary>
+        /// Checks, if the absolute difference between this and another instance is inside the given tolerance.
+        /// </summary>
+        /// <returns>Returns false, if the absolute difference is greater than the given tolerance.</returns>
+        public bool Equals(Power comparison, Power tolerance)
+        {
+            var diff = Math.Abs(Watt - comparison.Watt);
+            return diff <= tolerance.Watt;
+        }
+
         public override int GetHashCode()
         {
             return nameof(Watt).GetHashCode() ^ Watt.GetHashCode();

@@ -1,4 +1,6 @@
-﻿namespace Measurements
+﻿using System;
+
+namespace Measurements
 {
     public struct Force
     {
@@ -24,6 +26,16 @@
         {
             if (!(obj is Force)) return false;
             return this == (Force)obj;
+        }
+
+        /// <summary>
+        /// Checks, if the absolute difference between this and another instance is inside the given tolerance.
+        /// </summary>
+        /// <returns>Returns false, if the absolute difference is greater than the given tolerance.</returns>
+        public bool Equals(Force comparison, Force tolerance)
+        {
+            var diff = Math.Abs(Newton - comparison.Newton);
+            return diff <= tolerance.Newton;
         }
 
         public override int GetHashCode()

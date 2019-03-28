@@ -42,6 +42,16 @@ namespace Measurements
             return this == (Work)obj;
         }
 
+        /// <summary>
+        /// Checks, if the absolute difference between this and another instance is inside the given tolerance.
+        /// </summary>
+        /// <returns>Returns false, if the absolute difference is greater than the given tolerance.</returns>
+        public bool Equals(Work comparison, Work tolerance)
+        {
+            var diff = Math.Abs(Joule - comparison.Joule);
+            return diff <= tolerance.Joule;
+        }
+
         public override int GetHashCode()
         {
             return nameof(Joule).GetHashCode() ^ Joule.GetHashCode();

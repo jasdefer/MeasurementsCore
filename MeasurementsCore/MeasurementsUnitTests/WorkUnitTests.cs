@@ -97,5 +97,17 @@ namespace MeasurementsUnitTests
             var work = Work.FromKiloWatt(1);
             Assert.AreEqual(1, work.KilowattHour);
         }
+
+        [TestMethod]
+        public void EqualsWithTolerance()
+        {
+            var value1 = new Work(1);
+            var value2 = new Work(2);
+            var tolerance = new Work(1);
+            Assert.IsTrue(value1.Equals(value2, tolerance));
+
+            tolerance = new Work(0.999);
+            Assert.IsFalse(value1.Equals(value2, tolerance));
+        }
     }
 }

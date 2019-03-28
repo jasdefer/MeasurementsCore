@@ -90,5 +90,17 @@ namespace MeasurementsUnitTests
             var power = new Power(1000000000);
             Assert.AreEqual(1, power.GigaWatt);
         }
+
+        [TestMethod]
+        public void EqualsWithTolerance()
+        {
+            var value1 = new Power(1);
+            var value2 = new Power(2);
+            var tolerance = new Power(1);
+            Assert.IsTrue(value1.Equals(value2, tolerance));
+
+            tolerance = new Power(0.999);
+            Assert.IsFalse(value1.Equals(value2, tolerance));
+        }
     }
 }

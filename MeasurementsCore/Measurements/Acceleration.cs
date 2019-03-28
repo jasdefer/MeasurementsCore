@@ -41,6 +41,16 @@ namespace Measurements
             return this == (Acceleration)obj;
         }
 
+        /// <summary>
+        /// Checks, if the absolute difference between this and another instance is inside the given tolerance.
+        /// </summary>
+        /// <returns>Returns false, if the absolute difference is greater than the given tolerance.</returns>
+        public bool Equals(Acceleration acceleration, Acceleration tolerance)
+        {
+            var diff = Math.Abs(MetersPerSecondSquared - acceleration.MetersPerSecondSquared);
+            return diff <= tolerance.MetersPerSecondSquared;
+        }
+
         public static bool operator ==(Acceleration a1, Acceleration a2)
         {
             return a1.MetersPerSecondSquared == a2.MetersPerSecondSquared;

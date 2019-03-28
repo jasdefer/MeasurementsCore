@@ -73,6 +73,16 @@ namespace Measurements
             return this == (Weight)obj;
         }
 
+        /// <summary>
+        /// Checks, if the absolute difference between this and another instance is inside the given tolerance.
+        /// </summary>
+        /// <returns>Returns false, if the absolute difference is greater than the given tolerance.</returns>
+        public bool Equals(Weight comparison, Weight tolerance)
+        {
+            var diff = Math.Abs(Gram - comparison.Gram);
+            return diff <= tolerance.Gram;
+        }
+
         public static bool operator ==(Weight w1, Weight w2)
         {
             return w1.Gram == w2.Gram;

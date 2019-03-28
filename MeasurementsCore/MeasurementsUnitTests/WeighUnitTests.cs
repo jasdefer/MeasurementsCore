@@ -8,8 +8,8 @@ namespace MeasurementsUnitTests
     public class WeighUnitTests
     {
         [DataTestMethod]
-        [DataRow(-1)]
-        [DataRow(double.MaxValue/100)]
+        [DataRow(double.MaxValue / 100)]
+        [DataRow(double.MaxValue / -100)]
         public void ConstructorInvalidWeights(double grams)
         {
             Assert.ThrowsException<ArgumentOutOfRangeException>(() => new Weight(grams));
@@ -63,6 +63,18 @@ namespace MeasurementsUnitTests
         {
             var weight = Weight.FromMetricTons(metricTons);
             Assert.AreEqual(weight.MetricTon, metricTons);
+        }
+
+        [TestMethod]
+        public void EqualsWithTolerance()
+        {
+            var value1 = new Weight(1);
+            var value2 = new Weight(2);
+            var tolerance = new Weight(1);
+            Assert.IsTrue(value1.Equals(value2, tolerance));
+
+            tolerance = new Weight(0.999);
+            Assert.IsFalse(value1.Equals(value2, tolerance));
         }
     }
 }

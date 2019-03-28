@@ -164,5 +164,17 @@ namespace MeasurementsUnitTests
             var t = s.GetTimeForUniformAcceleration(new Acceleration(-1), new Distance(0), new Velocity(5));
             Assert.AreEqual(1.12702, t.TotalSeconds, 0.00001);
         }
+
+        [TestMethod]
+        public void EqualsWithTolerance()
+        {
+            var value1 = new Distance(1);
+            var value2 = new Distance(2);
+            var tolerance = new Distance(1);
+            Assert.IsTrue(value1.Equals(value2, tolerance));
+
+            tolerance = new Distance(0.999);
+            Assert.IsFalse(value1.Equals(value2, tolerance));
+        }
     }
 }
