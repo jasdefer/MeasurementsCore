@@ -69,5 +69,17 @@ namespace MeasurementsUnitTests
             var result = f1 / f2;
             Assert.AreEqual(5, result);
         }
+
+        [TestMethod]
+        public void EqualsWithTolerance()
+        {
+            var value1 = new Force(1);
+            var value2 = new Force(2);
+            var tolerance = new Force(1);
+            Assert.IsTrue(value1.Equals(value2, tolerance));
+
+            tolerance = new Force(0.999);
+            Assert.IsFalse(value1.Equals(value2, tolerance));
+        }
     }
 }

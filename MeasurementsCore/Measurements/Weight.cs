@@ -7,8 +7,8 @@ namespace Measurements
     /// </summary>
     public struct Weight
     {
-        private const double MAX_GRAM = double.MaxValue/1000;
-        private const double MIN_GRAM = 0;
+        private const double MAX_GRAM = double.MaxValue / 1000;
+        private const double MIN_GRAM = double.MinValue / 1000;
 
         public const int MILLIGRAMS_PER_GRAM = 1000;
         public const int GRAMS_PER_KILOGRAM = 1000;
@@ -71,6 +71,16 @@ namespace Measurements
         {
             if (!(obj is Weight)) return false;
             return this == (Weight)obj;
+        }
+
+        /// <summary>
+        /// Checks, if the absolute difference between this and another instance is inside the given tolerance.
+        /// </summary>
+        /// <returns>Returns false, if the absolute difference is greater than the given tolerance.</returns>
+        public bool Equals(Weight comparison, Weight tolerance)
+        {
+            var diff = Math.Abs(Gram - comparison.Gram);
+            return diff <= tolerance.Gram;
         }
 
         public static bool operator ==(Weight w1, Weight w2)

@@ -98,6 +98,16 @@ namespace Measurements
             return this == (Distance)obj;
         }
 
+        /// <summary>
+        /// Checks, if the absolute difference between this and another instance is inside the given tolerance.
+        /// </summary>
+        /// <returns>Returns false, if the absolute difference is greater than the given tolerance.</returns>
+        public bool Equals(Distance comparison, Distance tolerance)
+        {
+            var diff = Math.Abs(Meters - comparison.Meters);
+            return diff <= tolerance.Meters;
+        }
+
         public static bool operator ==(Distance distance1, Distance distance2)
         {
             return distance1.Meters == distance2.Meters;

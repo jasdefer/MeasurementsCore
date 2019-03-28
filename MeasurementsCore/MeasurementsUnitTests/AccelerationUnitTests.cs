@@ -99,5 +99,17 @@ namespace MeasurementsUnitTests
             var timespan = velocity / acceleration;
             Assert.AreEqual(0.5, timespan.TotalSeconds);
         }
+
+        [TestMethod]
+        public void EqualsWithTolerance()
+        {
+            var value1 = new Acceleration(1);
+            var value2 = new Acceleration(2);
+            var tolerance = new Acceleration(1);
+            Assert.IsTrue(value1.Equals(value2, tolerance));
+
+            tolerance = new Acceleration(0.999);
+            Assert.IsFalse(value1.Equals(value2, tolerance));
+        }
     }
 }

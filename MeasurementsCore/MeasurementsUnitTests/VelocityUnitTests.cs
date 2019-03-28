@@ -119,5 +119,17 @@ namespace MeasurementsUnitTests
             Velocity velocity1 = new Velocity(10);
             Assert.AreEqual(10d / divisor, (velocity1 / divisor).MetersPerSecond);
         }
+
+        [TestMethod]
+        public void EqualsWithTolerance()
+        {
+            var value1 = new Velocity(1);
+            var value2 = new Velocity(2);
+            var tolerance = new Velocity(1);
+            Assert.IsTrue(value1.Equals(value2, tolerance));
+
+            tolerance = new Velocity(0.999);
+            Assert.IsFalse(value1.Equals(value2, tolerance));
+        }
     }
 }

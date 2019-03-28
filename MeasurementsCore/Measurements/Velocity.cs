@@ -171,7 +171,17 @@ namespace Measurements
         public override bool Equals(object obj)
         {
             if (!(obj is Velocity)) return false;
-            return MetersPerSecond == ((Distance)obj).Meters;
+            return MetersPerSecond == ((Velocity)obj).MetersPerSecond;
+        }
+
+        /// <summary>
+        /// Checks, if the absolute difference between this and another instance is inside the given tolerance.
+        /// </summary>
+        /// <returns>Returns false, if the absolute difference is greater than the given tolerance.</returns>
+        public bool Equals(Velocity comparison, Velocity tolerance)
+        {
+            var diff = Math.Abs(MetersPerSecond - comparison.MetersPerSecond);
+            return diff <= tolerance.MetersPerSecond;
         }
 
         public override int GetHashCode()
