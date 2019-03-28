@@ -7,8 +7,8 @@ namespace Measurements
     /// </summary>
     public struct Weight
     {
-        private const double MAX_GRAM = double.MaxValue/1000;
-        private const double MIN_GRAM = 0;
+        private const double MAX_GRAM = double.MaxValue / 1000;
+        private const double MIN_GRAM = double.MinValue / 1000;
 
         public const int MILLIGRAMS_PER_GRAM = 1000;
         public const int GRAMS_PER_KILOGRAM = 1000;
